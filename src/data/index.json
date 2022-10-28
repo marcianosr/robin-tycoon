@@ -1,0 +1,226 @@
+{
+	"game": {
+		"categories": [
+			{
+				"name": "social",
+				"items": [
+					{
+						"name": "Vrienden maken en afspreken met vrienden",
+						"earned": {
+							"socialXP": 100
+						},
+						"required": {
+							"money": {
+								"basis": "weekly",
+								"amount": 50
+							},
+							"socialXP": 100
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Verzorging",
+						"earned": {
+							"socialXP": 200
+						},
+						"required": {
+							"money": {
+								"basis": "weekly",
+								"amount": 20
+							}
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Cézanne",
+						"earned": {
+							"socialXP": 200,
+							"lifeXP": 200
+						},
+						"required": {
+							"socialXP": 400,
+							"lifeXP": 400,
+							"radius": 100
+						},
+						"cooldown": 50
+					}
+				]
+			},
+			{
+				"name": "work",
+				"items": [
+					{
+						"name": "Zakgeld krijgen",
+						"earned": {
+							"money": {
+								"amount": 10,
+								"basis": "monthly"
+							}
+						},
+						"required": {
+							"lifeXP": 10
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "BODO Pompstation",
+						"once": true,
+
+						"earned": {
+							"workXP": 100,
+							"money": {
+								"amount": 50,
+								"basis": "monthly"
+							}
+						},
+						"required": {
+							"socialXP": 150,
+							"lifeXP": 200,
+							"radius": 50
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Stagiair bij RI Print & Sign",
+						"earned": {
+							"workXP": 100,
+							"lifeXP": 100,
+							"socialXP": 100,
+							"money": {
+								"amount": 125,
+								"basis": "monthly"
+							}
+						},
+						"required": {
+							"socialXP": 250,
+							"lifeXP": 300,
+							"radius": 150
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Design bij Coqtail",
+						"earned": {
+							"workXP": 500,
+							"lifeXP": 500,
+							"socialXP": 500,
+							"money": {
+								"amount": 275,
+								"basis": "monthly"
+							}
+						},
+						"required": {
+							"socialXP": 350,
+							"lifeXP": 300,
+							"radius": 500
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Art Director @ Emakina",
+						"earned": {
+							"workXP": 1200,
+							"lifeXP": 1000,
+							"socialXP": 500,
+							"money": {
+								"amount": 500,
+								"basis": "monthly"
+							}
+						},
+						"required": {
+							"socialXP": 550,
+							"lifeXP": 500,
+							"radius": 1500
+						},
+						"cooldown": 50
+					}
+				]
+			},
+			{
+				"name": "vehicle",
+				"items": [
+					{
+						"name": "Lopen",
+						"earned": {
+							"socialXP": 100,
+							"radius": 25
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Fietsen",
+						"earned": {
+							"socialXP": 100,
+							"lifeXP": 10,
+							"radius": 150
+						},
+						"required": {
+							"money": {
+								"basis": "monthly",
+								"amount": 100
+							},
+							"lifeXP": 25
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Leipe Scooter",
+						"earned": {
+							"socialXP": 300,
+							"lifeXP": 50,
+							"radius": 1000
+						},
+						"required": {
+							"money": {
+								"basis": "weekly",
+								"amount": 100
+							},
+							"lifeXP": 100
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Renault Clio",
+						"earned": {
+							"socialXP": 100,
+							"lifeXP": 200,
+							"radius": 5000
+						},
+						"required": {
+							"money": {
+								"basis": "weekly",
+								"amount": 200
+							},
+							"lifeXP": 500
+						},
+						"cooldown": 50
+					}
+				]
+			},
+			{
+				"name": "hobbies",
+				"items": [
+					{
+						"name": "Kornet bij Crescendo",
+						"earned": {
+							"socialXP": 200,
+							"lifeXP": 100
+						},
+						"required": {
+							"money": { "amount": 25, "basis": "monthly" },
+							"radius": 500
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Tekenen",
+						"earned": {
+							"workXP": 50
+						},
+						"cooldown": 150
+					}
+				]
+			}
+		]
+	}
+}
