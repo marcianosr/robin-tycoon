@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/robin-tycoon)/static/css/main.41e08a48.css",
-    "main.js": "/robin-tycoon)/static/js/main.ab5400b8.js",
-    "static/js/787.1f706408.chunk.js": "/robin-tycoon)/static/js/787.1f706408.chunk.js",
-    "index.html": "/robin-tycoon)/index.html",
-    "main.41e08a48.css.map": "/robin-tycoon)/static/css/main.41e08a48.css.map",
-    "main.ab5400b8.js.map": "/robin-tycoon)/static/js/main.ab5400b8.js.map",
-    "787.1f706408.chunk.js.map": "/robin-tycoon)/static/js/787.1f706408.chunk.js.map"
+    "main.css": "/robin-tycoon/static/css/main.41e08a48.css",
+    "main.js": "/robin-tycoon/static/js/main.a0bba89d.js",
+    "static/js/787.1f706408.chunk.js": "/robin-tycoon/static/js/787.1f706408.chunk.js",
+    "index.html": "/robin-tycoon/index.html",
+    "main.41e08a48.css.map": "/robin-tycoon/static/css/main.41e08a48.css.map",
+    "main.a0bba89d.js.map": "/robin-tycoon/static/js/main.a0bba89d.js.map",
+    "787.1f706408.chunk.js.map": "/robin-tycoon/static/js/787.1f706408.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.41e08a48.css",
-    "static/js/main.ab5400b8.js"
+    "static/js/main.a0bba89d.js"
   ]
 }
