@@ -1,19 +1,21 @@
-import { FC, useState } from "react";
-import { Item, XP } from "../../App";
+import { FC, useEffect, useState } from "react";
+import { Item, RequirementEarned, XP } from "../../App";
 import CountDown from "../CountDown";
 
 type Props = {
 	item: any;
 	gameState: any;
 	setGameState: any;
-	isEnabled: any;
+	amountOfActionsByCategory: number;
+	setAmountOfActionsByCategory: (n: number) => void;
 };
 
 const ActionButton: FC<Props> = ({
 	item,
 	gameState,
 	setGameState,
-	isEnabled,
+	amountOfActionsByCategory,
+	setAmountOfActionsByCategory,
 }) => {
 	const [timerActive, setTimerActive] = useState(false);
 
@@ -21,19 +23,28 @@ const ActionButton: FC<Props> = ({
 		const values = Object.entries(item.earned);
 		const updated = values.reduce((prev, [key, value]) => {
 			const gameStateValue = gameState[key as keyof XP];
-			const v = value as number;
 
 			if (key === "radius") {
 				return {
 					...prev,
-					radius: v,
+					radius: value,
 				};
 			}
+
+			if (key === "money" && typeof value !== "number") {
+				return {
+					...prev,
+					money: gameStateValue + value.amount,
+					income: value.amount,
+				};
+			}
+
 			return {
 				...prev,
-				[key]: gameStateValue + v,
+				[key]: gameStateValue + value,
 			};
 		}, {});
+		setAmountOfActionsByCategory(amountOfActionsByCategory + 1);
 		setTimerActive(true);
 		setGameState({
 			...gameState,
@@ -41,10 +52,33 @@ const ActionButton: FC<Props> = ({
 		});
 	};
 
+	const isEnabled = (requirement: RequirementEarned) => {
+		if (!requirement) {
+			return true;
+		}
+
+		const req = Object.entries(requirement).map(
+			([key, value]: [unknown, any]) => {
+				const gameKey = gameState[key as keyof XP];
+				if (key === "money") {
+					return gameState.money >= value.amount;
+				}
+
+				return gameKey >= value;
+			}
+		);
+		return req.every((r) => r);
+	};
+
 	return (
 		<button
 			onClick={() => action(item)}
-			disabled={isEnabled || timerActive}
+			disabled={
+				!isEnabled(item.required) ||
+				(item.limit &&
+					amountOfActionsByCategory === item.limit.amount) ||
+				timerActive
+			}
 		>
 			<span>{item.name} uitvoeren </span>
 			{timerActive && (

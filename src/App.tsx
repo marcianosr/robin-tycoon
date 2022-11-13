@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import data from "./data/index.json";
-import CountDown from "./components/CountDown";
-import ActionButton from "./components/ActionButton";
+import Option from "./components/Option";
+import Meter from "./components/Meter";
 
 export type XP = {
 	lifeXP?: number;
@@ -15,22 +15,47 @@ type Basis = "monthly" | "weekly";
 
 type Money = {
 	amount: number;
-	basis?: Basis;
+	basis?: string;
 };
 
-type RequirementEarned = Partial<XP> & { money: Money };
+export type RequirementEarned = Partial<XP> & { money?: Money };
 
 export type Item = {
 	name: string;
-	required: RequirementEarned;
+	// required: RequirementEarned;
+	required?: any;
 	earned: RequirementEarned;
 	cooldown: number;
+	limit?: {
+		amount: number;
+	};
 };
 
-export type Stats = XP & { money: Money };
+export type Stats = XP & { money?: Money };
 
 type Key = { [key in keyof XP]: number };
-type Level = "zwerver" | "rijk";
+type Level =
+	| "starter"
+	| "kluizenaar"
+	| "levensgenieter"
+	| "familieman"
+	| "rich guy robin"
+	| "gamenerd";
+
+const months = [
+	"Januari",
+	"Febuari",
+	"Maart",
+	"April",
+	"Mei",
+	"Juni",
+	"Juli",
+	"Augustus",
+	"September",
+	"Oktober",
+	"November",
+	"December",
+];
 
 function App() {
 	const [gameState, setGameState] = useState({
@@ -39,25 +64,55 @@ function App() {
 		workXP: 0,
 		money: 0,
 		radius: 0,
-		level: "zwerver",
+		level: "starter",
+		time: {
+			month: 1,
+			week: 1,
+			year: 2010,
+		},
+		income: 0,
 	});
 
-	const isEnabled = (requirement: RequirementEarned) => {
-		if (!requirement) return true;
+	const [showPopup, setShowPopup] = useState(false);
+	const [fakeBuyButtonText, setFakeBuyButtonText] = useState(false);
 
-		const req = Object.entries(requirement).map(
-			([key, value]: [unknown, any]) => {
-				const gameKey = gameState[key as keyof XP];
-				if (key === "money") {
-					return gameState.money >= value;
-				}
+	useEffect(() => {
+		const t = setTimeout(() => {
+			setGameState({
+				...gameState,
+				time: { ...gameState.time, week: gameState.time.week + 1 },
+			});
+		}, 10000);
 
-				return gameKey >= value;
-			}
-		);
+		return () => {
+			clearTimeout(t);
+		};
+	}, [gameState]);
 
-		return req.every((r) => r);
-	};
+	useEffect(() => {
+		if (gameState.time.week % 4 === 0)
+			setGameState({
+				...gameState,
+				time: {
+					...gameState.time,
+					month: gameState.time.month + 1,
+				},
+				money: gameState.money + gameState.income,
+			});
+	}, [gameState.time.week]);
+
+	useEffect(() => {
+		if (gameState.time.week % 52 === 0)
+			setGameState({
+				...gameState,
+				time: {
+					...gameState.time,
+					year: gameState.time.year + 1,
+					month: 1,
+					week: 1,
+				},
+			});
+	}, [gameState.time.month]);
 
 	return (
 		<div className="App">
@@ -68,200 +123,113 @@ function App() {
 				</section>
 
 				<section>
+					<Meter
+						max={51}
+						value={gameState.time.week}
+						text={`Week ${gameState.time.week}`}
+					/>
+					<Meter
+						max={11}
+						value={gameState.time.month}
+						text={`Maand ${months[gameState.time.month - 1]}`}
+					/>
+					<Meter
+						max={2022}
+						value={gameState.time.year}
+						text={`Jaar ${gameState.time.year}`}
+					/>
+				</section>
+
+				<section>
 					<strong>Status</strong>
 
 					<article>
 						<div>
-							<label>Levens ervaring: </label>
+							<label>Levens ervaring:</label>
 							<span>{gameState.lifeXP}</span>
 						</div>
 						<div>
-							<label>Sociale ervaring: </label>
+							<label>Sociaal: </label>
 							<span>{gameState.socialXP}</span>
 						</div>
 						<div>
-							<label>Werk ervaring: </label>
+							<label>Werk ervaring:</label>
 							<span>{gameState.workXP}</span>
 						</div>
 						<div>
-							<label>Radius: </label>
+							<label>Bewegings radius:</label>
 							<span>{gameState.radius}</span>
 						</div>
 						<div>
-							<label>Geld: </label>
+							<label>Geld:</label>
 							<span>{gameState.money}</span>
 						</div>
+						<div>
+							Maandelijks inkomen:
+							<span>{gameState.income}</span>
+						</div>
 					</article>
+
+					<section>
+						<span>Advertenties</span>
+						<button onClick={() => setShowPopup(true)}>
+							Kopen
+						</button>
+					</section>
 				</section>
 			</header>
+
+			{showPopup && (
+				<dialog open={showPopup}>
+					<ul>
+						<li>
+							{!fakeBuyButtonText && (
+								<article>
+									<span>Levens elixer</span>
+									<span>
+										+100 sociale XP en +100 levens ervaring
+									</span>
+									<span>5 euro</span>
+									<button
+										onClick={() => {
+											setFakeBuyButtonText(true);
+											setGameState({
+												...gameState,
+												lifeXP: -200,
+												socialXP: -200,
+												money: -200,
+											});
+										}}
+									>
+										Koop
+									</button>
+								</article>
+							)}
+
+							{fakeBuyButtonText && (
+								<span>
+									Gast... niet alles kun je kopen. Omdat je
+									hier in bent getrapt zetten we je weer even
+									een stapje terug
+								</span>
+							)}
+						</li>
+					</ul>
+				</dialog>
+			)}
 			<section>
 				<ul style={{ display: "flex" }}>
 					{data.game.categories.map((item) => (
 						<li>
 							<h1>{item.name}</h1>
 							<ul>
-								{item.items.map((item) => {
-									const requirementItems =
-										(item.required as Stats) || {};
-									const earnedItems =
-										(item.earned as Stats) || {};
-									return (
-										<>
-											<section>
-												<h2>{item.name}</h2>
-												<strong>
-													Minimale eisen per actie
-												</strong>
-												{Object.keys(requirementItems)
-													.length === 0 && (
-													<p>Geen vereisten</p>
-												)}
-												{requirementItems.lifeXP && (
-													<div>
-														<span>
-															Levens ervaring:{" "}
-														</span>
-														<span>
-															{
-																requirementItems.lifeXP
-															}
-														</span>
-													</div>
-												)}
-												{requirementItems.socialXP && (
-													<div>
-														<span>
-															Sociale ervaring:{" "}
-														</span>
-														<span>
-															{
-																requirementItems.socialXP
-															}
-														</span>
-													</div>
-												)}
-												{requirementItems.workXP && (
-													<div>
-														<span>
-															Werk ervaring:{" "}
-														</span>
-														<span>
-															{
-																requirementItems.workXP
-															}
-														</span>
-													</div>
-												)}
-												{requirementItems.workXP && (
-													<div>
-														<span>
-															Actieradius:{" "}
-														</span>
-														<span>
-															{
-																requirementItems.radius
-															}
-														</span>
-													</div>
-												)}
-												{requirementItems.money && (
-													<div>
-														<span>Kosten: </span>
-														<span>
-															{
-																requirementItems
-																	.money
-																	.amount
-															}
-														</span>
-														<span>
-															per{" "}
-															{
-																requirementItems
-																	.money.basis
-															}
-														</span>
-													</div>
-												)}
-
-												<ActionButton
-													isEnabled={
-														!isEnabled(
-															item.required as RequirementEarned
-														)
-													}
-													gameState={gameState}
-													setGameState={setGameState}
-													item={item}
-												/>
-											</section>
-											<section>
-												<strong>Je verdient:</strong>
-												{earnedItems.lifeXP && (
-													<div>
-														<span>
-															Levens ervaring:{" "}
-														</span>
-														<span>
-															{earnedItems.lifeXP}
-														</span>
-													</div>
-												)}
-												{earnedItems.socialXP && (
-													<div>
-														<span>
-															Sociale ervaring:{" "}
-														</span>
-														<span>
-															{
-																earnedItems.socialXP
-															}
-														</span>
-													</div>
-												)}
-												{earnedItems.workXP && (
-													<div>
-														<span>
-															Werk ervaring:{" "}
-														</span>
-														<span>
-															{earnedItems.workXP}
-														</span>
-													</div>
-												)}
-												{earnedItems.radius && (
-													<div>
-														<span>
-															Actieradius:{" "}
-														</span>
-														<span>
-															{earnedItems.radius}
-														</span>
-													</div>
-												)}
-												{earnedItems.money && (
-													<div>
-														<span>Kosten: </span>
-														<span>
-															{
-																earnedItems
-																	.money
-																	.amount
-															}
-														</span>
-														<span>
-															per{" "}
-															{
-																earnedItems
-																	.money.basis
-															}
-														</span>
-													</div>
-												)}
-											</section>
-										</>
-									);
-								})}
+								{item.items.map((item: Item) => (
+									<Option
+										item={item}
+										gameState={gameState}
+										setGameState={setGameState}
+									/>
+								))}
 							</ul>
 						</li>
 					))}
