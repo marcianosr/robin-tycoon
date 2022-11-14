@@ -3,7 +3,8 @@ import { Item, RequirementEarned, XP } from "../../App";
 import CountDown from "../CountDown";
 
 type Props = {
-	item: any;
+	category: string;
+	item: Item;
 	gameState: any;
 	setGameState: any;
 	amountOfActionsByCategory: number;
@@ -11,6 +12,7 @@ type Props = {
 };
 
 const ActionButton: FC<Props> = ({
+	category,
 	item,
 	gameState,
 	setGameState,
@@ -80,7 +82,11 @@ const ActionButton: FC<Props> = ({
 				timerActive
 			}
 		>
-			<span>{item.name} uitvoeren </span>
+			{category === "werken" ? (
+				<span>"Werken" uitvoeren</span>
+			) : (
+				<span>"{item.name}" uitvoeren </span>
+			)}
 			{timerActive && (
 				<CountDown
 					timerActive={timerActive}

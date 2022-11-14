@@ -2,13 +2,64 @@
 	"game": {
 		"categories": [
 			{
-				"name": "social",
+				"name": "Sociaal en hobbies",
 				"items": [
+					{
+						"name": "Kornet bij Crescendo",
+						"imageURL": "robin-cornet.png",
+
+						"earned": {
+							"socialXP": 200,
+							"lifeXP": 100,
+							"money": {
+								"amount": -100
+							}
+						},
+						"required": {
+							"money": { "amount": 25, "basis": "monthly" },
+							"radius": 500
+						},
+						"cooldown": 100
+					},
+					{
+						"name": "Sportschool",
+						"earned": {
+							"socialXP": 50,
+							"lifeXP": 100,
+							"money": {
+								"amount": -50
+							}
+						},
+						"cooldown": 150
+					},
+					{
+						"name": "Tekenen",
+						"earned": {
+							"workXP": 50
+						},
+						"cooldown": 50
+					},
+					{
+						"name": "Potje League of Legends met Martijn",
+						"earned": {
+							"socialXP": 10,
+							"workXP": -10
+						},
+						"cooldown": 25
+					},
 					{
 						"name": "Advies vragen van thuis",
 						"earned": {
 							"socialXP": 50,
-							"lifeXP": 50
+							"lifeXP": 100
+						},
+						"cooldown": 200
+					},
+					{
+						"name": "Op bezoek gaan bij opa en oma",
+						"earned": {
+							"socialXP": 50,
+							"lifeXP": 100
 						},
 						"cooldown": 200
 					},
@@ -28,25 +79,31 @@
 					{
 						"name": "Afspreken met vrienden",
 						"earned": {
-							"socialXP": 100
+							"socialXP": 150,
+							"lifeXP": 50,
+							"workXP": -20,
+							"money": {
+								"amount": -50
+							}
 						},
 						"required": {
 							"money": {
-								"basis": "weekly",
-								"amount": 10
+								"amount": 100
 							},
-							"socialXP": 10
+							"socialXP": 100
 						},
-						"cooldown": 50
+						"cooldown": 100
 					},
 					{
 						"name": "Verzorging",
 						"earned": {
-							"socialXP": 200
+							"socialXP": 20,
+							"money": {
+								"amount": -20
+							}
 						},
 						"required": {
 							"money": {
-								"basis": "weekly",
 								"amount": 20
 							}
 						},
@@ -59,11 +116,12 @@
 							"lifeXP": 200
 						},
 						"required": {
-							"socialXP": 400,
-							"lifeXP": 400,
+							"socialXP": 500,
+							"lifeXP": 500,
+							"money": 500,
 							"radius": 100
 						},
-						"cooldown": 50,
+						"cooldown": 0,
 						"limit": {
 							"amount": 1
 						}
@@ -71,15 +129,13 @@
 				]
 			},
 			{
-				"name": "work",
-				"limit": 1,
+				"name": "Werken",
 				"items": [
 					{
 						"name": "Gesponsord worden door pa en ma",
 						"earned": {
 							"money": {
-								"amount": 25,
-								"basis": "monthly"
+								"amount": 25
 							}
 						},
 						"cooldown": 0,
@@ -92,8 +148,7 @@
 						"earned": {
 							"workXP": 100,
 							"money": {
-								"amount": 50,
-								"basis": "monthly"
+								"amount": 50
 							}
 						},
 						"required": {
@@ -101,7 +156,7 @@
 							"lifeXP": 10,
 							"radius": 10
 						},
-						"cooldown": 40,
+						"cooldown": 0,
 						"limit": {
 							"amount": 1
 						}
@@ -113,8 +168,7 @@
 							"lifeXP": 100,
 							"socialXP": 100,
 							"money": {
-								"amount": 125,
-								"basis": "monthly"
+								"amount": 125
 							}
 						},
 						"required": {
@@ -122,25 +176,31 @@
 							"lifeXP": 300,
 							"radius": 150
 						},
-						"cooldown": 55
+						"limit": {
+							"amount": 1
+						},
+						"cooldown": 0
 					},
 					{
 						"name": "Design bij Coqtail",
+						"videoURL": "https://www.facebook.com/jeffrey.beckers/videos/2974491055947757",
 						"earned": {
 							"workXP": 500,
 							"lifeXP": 500,
 							"socialXP": 500,
 							"money": {
-								"amount": 275,
-								"basis": "monthly"
+								"amount": 275
 							}
+						},
+						"limit": {
+							"amount": 1
 						},
 						"required": {
 							"socialXP": 350,
 							"lifeXP": 300,
 							"radius": 500
 						},
-						"cooldown": 120
+						"cooldown": 0
 					},
 					{
 						"name": "Art Director @ Emakina",
@@ -149,26 +209,28 @@
 							"lifeXP": 1000,
 							"socialXP": 500,
 							"money": {
-								"amount": 500,
-								"basis": "monthly"
+								"amount": 500
 							}
+						},
+						"limit": {
+							"amount": 1
 						},
 						"required": {
 							"socialXP": 550,
 							"lifeXP": 500,
 							"radius": 1500
 						},
-						"cooldown": 240
+						"cooldown": 0
 					}
 				]
 			},
 			{
-				"name": "vehicle",
+				"name": "Voertuig",
 				"items": [
 					{
 						"name": "Lopen",
 						"earned": {
-							"socialXP": 100,
+							"socialXP": 25,
 							"radius": 25
 						},
 						"cooldown": 10
@@ -224,33 +286,71 @@
 				]
 			},
 			{
-				"name": "hobbies",
+				"name": "Wonen",
 				"items": [
 					{
-						"name": "Kornet bij Crescendo",
+						"name": "Thuis wonen",
 						"earned": {
-							"socialXP": 200,
-							"lifeXP": 100
+							"lifeXP": 10
+						},
+						"cooldown": 0,
+						"limit": {
+							"amount": 1
+						}
+					},
+					{
+						"name": "1e appartement in Oostzaan",
+						"earned": {
+							"lifeXP": 200,
+							"money": {
+								"amount": -500
+							}
 						},
 						"required": {
-							"money": { "amount": 25, "basis": "monthly" },
-							"radius": 500
+							"money": {
+								"amount": 650
+							}
 						},
-						"cooldown": 100
+						"cooldown": 0,
+						"limit": {
+							"amount": 1
+						}
 					},
 					{
-						"name": "Tekenen",
+						"name": "2e appartement in Oostzaan",
 						"earned": {
-							"workXP": 50
+							"lifeXP": 200,
+							"money": {
+								"amount": -700
+							}
 						},
-						"cooldown": 50
+						"required": {
+							"money": {
+								"amount": 800
+							}
+						},
+						"cooldown": 0,
+						"limit": {
+							"amount": 1
+						}
 					},
 					{
-						"name": "Potje LoL met Martijn",
+						"name": "Villa in Oostzaan",
 						"earned": {
-							"socialXP": 20
+							"lifeXP": 300,
+							"money": {
+								"amount": -1200
+							}
 						},
-						"cooldown": 10
+						"required": {
+							"money": {
+								"amount": 1500
+							}
+						},
+						"cooldown": 0,
+						"limit": {
+							"amount": 1
+						}
 					}
 				]
 			}

@@ -2,14 +2,16 @@ import { FC, useState } from "react";
 import { Item } from "../../App";
 import ActionButton from "../ActionButton";
 import Meter from "../Meter";
+import styles from "./styles.module.css";
 
 type Props = {
+	category: string;
 	item: Item;
 	gameState: any;
 	setGameState: any;
 };
 
-const Option: FC<Props> = ({ item, gameState, setGameState }) => {
+const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 	const [amountOfActionsByCategory, setAmountOfActionsByCategory] =
 		useState(0);
 
@@ -17,7 +19,25 @@ const Option: FC<Props> = ({ item, gameState, setGameState }) => {
 		<section>
 			<section>
 				<h2>{item.name}</h2>
-
+				{item.videoURL && (
+					<iframe
+						src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjeffrey.beckers%2Fvideos%2F2974491055947757%2F&show_text=false&width=560&t=0"
+						width="560"
+						height="314"
+						scrolling="no"
+						frameBorder="0"
+						allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+					></iframe>
+				)}
+				{item.imageURL && (
+					<div className={styles.imageContainer}>
+						<img
+							src={`${process.env.PUBLIC_URL}/${item.imageURL}`}
+							width={"100%"}
+							height={"100%"}
+						/>
+					</div>
+				)}
 				{item.limit ? (
 					<Meter
 						max={item.limit.amount}
@@ -59,14 +79,16 @@ const Option: FC<Props> = ({ item, gameState, setGameState }) => {
 						)}
 						{item.required.money && (
 							<div>
-								<span>Kosten: </span>
-								<span>{item.required.money.amount}</span>
-								<span>per {item.required.money.basis}</span>
+								<span>
+									Je moet minimaal €
+									{item.required.money.amount} hebben verdiend{" "}
+								</span>
 							</div>
 						)}
 					</>
 				)}
 				<ActionButton
+					category={category}
 					amountOfActionsByCategory={amountOfActionsByCategory}
 					setAmountOfActionsByCategory={setAmountOfActionsByCategory}
 					gameState={gameState}
@@ -98,13 +120,13 @@ const Option: FC<Props> = ({ item, gameState, setGameState }) => {
 					<div>
 						<span>Actieradius: </span>
 						<span>{item.earned.radius}</span>
+						<small>*Actieradius is niet incrementeel</small>
 					</div>
 				)}
 				{item.earned.money && (
 					<div>
-						<span>Kosten: </span>
+						{item.earned.money.amount < 0 && <span>Kosten: </span>}
 						<span>{item.earned.money.amount}</span>
-						<span>per {item.earned.money.basis}</span>
 					</div>
 				)}
 			</section>
