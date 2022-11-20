@@ -11,6 +11,24 @@ type Props = {
 	setAmountOfActionsByCategory: (n: number) => void;
 };
 
+export const isEnabled = (requirement: RequirementEarned, gameState: any) => {
+	if (!requirement) {
+		return true;
+	}
+
+	const req = Object.entries(requirement).map(
+		([key, value]: [unknown, any]) => {
+			const gameKey = gameState[key as keyof XP];
+			if (key === "money") {
+				return gameState.money >= value.amount;
+			}
+
+			return gameKey >= value;
+		}
+	);
+	return req.every((r) => r);
+};
+
 const ActionButton: FC<Props> = ({
 	category,
 	item,
@@ -54,29 +72,11 @@ const ActionButton: FC<Props> = ({
 		});
 	};
 
-	const isEnabled = (requirement: RequirementEarned) => {
-		if (!requirement) {
-			return true;
-		}
-
-		const req = Object.entries(requirement).map(
-			([key, value]: [unknown, any]) => {
-				const gameKey = gameState[key as keyof XP];
-				if (key === "money") {
-					return gameState.money >= value.amount;
-				}
-
-				return gameKey >= value;
-			}
-		);
-		return req.every((r) => r);
-	};
-
 	return (
 		<button
 			onClick={() => action(item)}
 			disabled={
-				!isEnabled(item.required) ||
+				!isEnabled(item.required, gameState) ||
 				(item.limit &&
 					amountOfActionsByCategory === item.limit.amount) ||
 				timerActive

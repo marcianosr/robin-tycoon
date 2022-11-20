@@ -3,11 +3,12 @@
 		"categories": [
 			{
 				"name": "Sociaal en hobbies",
+				"shortName": "social",
+				"description": "Genieten van het leven is belangrijk.",
 				"items": [
 					{
 						"name": "Kornet bij Crescendo",
 						"imageURL": "robin-cornet.png",
-
 						"earned": {
 							"socialXP": 200,
 							"lifeXP": 100,
@@ -22,7 +23,8 @@
 						"cooldown": 100
 					},
 					{
-						"name": "Sportschool",
+						"name": "ff gym pakken",
+						"imageURL": "robin-gym.jpeg",
 						"earned": {
 							"socialXP": 50,
 							"lifeXP": 100,
@@ -34,6 +36,7 @@
 					},
 					{
 						"name": "Tekenen",
+						"imageURL": "robin-tekenen.jpeg",
 						"earned": {
 							"workXP": 50
 						},
@@ -41,6 +44,7 @@
 					},
 					{
 						"name": "Potje League of Legends met Martijn",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/487779_339938256122089_1105893052_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f9d7a1&_nc_ohc=tjaa8YhTr-QAX8r4_hB&_nc_ht=scontent-ams4-1.xx&oh=00_AfD4-FLNwoc9Fm3_-RUrbvPD6Ck7Sn3Oa9gcEIyfnmLiTQ&oe=63A17E99",
 						"earned": {
 							"socialXP": 10,
 							"workXP": -10
@@ -65,6 +69,7 @@
 					},
 					{
 						"name": "Vrienden maken",
+						"imageURL": "https://scontent-ams2-1.xx.fbcdn.net/v/t1.18169-9/1231653_10200580608424726_805898821_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=nunuioUKrFkAX9IPLm4&_nc_ht=scontent-ams2-1.xx&oh=00_AfB6_xMdYJ4mMoTYW9u4nmdMFVbfX77EJC-W9rzSslvaTw&oe=63A17ADA",
 						"earned": {
 							"socialXP": 100
 						},
@@ -78,6 +83,7 @@
 					},
 					{
 						"name": "Afspreken met vrienden",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t31.18172-8/1052578_10200275638920679_1146745910_o.jpg?_nc_cat=101&ccb=1-7&_nc_sid=ba80b0&_nc_ohc=gPNmcdBagDEAX_AyqAj&_nc_ht=scontent-ams4-1.xx&oh=00_AfDzAYnf2OmpJxhxB7DnF58mFEHJxeXbp9Aph0XdjhDTag&oe=63A160AB",
 						"earned": {
 							"socialXP": 150,
 							"lifeXP": 50,
@@ -96,6 +102,7 @@
 					},
 					{
 						"name": "Verzorging",
+						"imageURL": "robin-fashion.jpeg",
 						"earned": {
 							"socialXP": 20,
 							"money": {
@@ -111,6 +118,7 @@
 					},
 					{
 						"name": "Cézanne",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/11220111_916651291729982_7136581538902823497_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=g-rbLWtSLWMAX8cHSn_&_nc_ht=scontent-ams4-1.xx&oh=00_AfAtm62uVsgMnxBSR_NjnJ2Kn10qiYXcIg8bxofp6IBWvQ&oe=63A177B7",
 						"earned": {
 							"socialXP": 200,
 							"lifeXP": 200
@@ -130,6 +138,8 @@
 			},
 			{
 				"name": "Werken",
+				"shortName": "work",
+				"description": "Deze acties kun je eenmalig uitvoeren. Hierdoor krijg je maandelijks een inkomen",
 				"items": [
 					{
 						"name": "Gesponsord worden door pa en ma",
@@ -145,6 +155,7 @@
 					},
 					{
 						"name": "BODO Pompstation",
+						"imageURL": "https://topbakverhuur.nl/wp-content/uploads/2018/03/Avia-Amsterdam-Appelweg-46.png",
 						"earned": {
 							"workXP": 100,
 							"money": {
@@ -204,6 +215,8 @@
 					},
 					{
 						"name": "Art Director @ Emakina",
+						"imageURL": "robin-art-director.jpeg",
+
 						"earned": {
 							"workXP": 1200,
 							"lifeXP": 1000,
@@ -226,6 +239,8 @@
 			},
 			{
 				"name": "Voertuig",
+				"shortName": "verhicle",
+				"description": "Bij deze acties vergroot je je actieradius.",
 				"items": [
 					{
 						"name": "Lopen",
@@ -287,6 +302,8 @@
 			},
 			{
 				"name": "Wonen",
+				"shortName": "living",
+				"description": "Deze acties zullen je wat kosten maar helpen je wel je leven te stabiliseren.",
 				"items": [
 					{
 						"name": "Thuis wonen",

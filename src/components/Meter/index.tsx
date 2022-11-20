@@ -1,4 +1,5 @@
 import { FC } from "react";
+import styles from "./styles.module.css";
 
 type Props = {
 	max: number;
@@ -8,7 +9,7 @@ type Props = {
 
 const Meter: FC<Props> = ({ max, value, text }) => {
 	return (
-		<>
+		<section className={styles.meterContainer}>
 			{text && <span>{text}</span>}
 
 			<div className="meter-container">
@@ -23,7 +24,7 @@ const Meter: FC<Props> = ({ max, value, text }) => {
 				></meter>
 				<span>{max}</span>
 			</div>
-		</>
+		</section>
 	);
 };
 

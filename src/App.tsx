@@ -4,6 +4,8 @@ import data from "./data/index.json";
 import Option from "./components/Option";
 import Meter from "./components/Meter";
 import Confetti from "react-confetti";
+import Profile, { evolveAt } from "./components/Profile";
+import classnames from "classnames";
 
 export type XP = {
 	lifeXP?: number;
@@ -38,15 +40,9 @@ export type Item = {
 export type Stats = XP & { money?: Money };
 
 type Key = { [key in keyof XP]: number };
-type Level =
-	| "starter"
-	| "kluizenaar"
-	| "levensgenieter"
-	| "familieman"
-	| "rich guy robin"
-	| "gamenerd";
+type ShortNames = "social" | "living" | "verhicle" | "work";
 
-const months = [
+export const months = [
 	"Januari",
 	"Febuari",
 	"Maart",
@@ -68,18 +64,39 @@ function App() {
 		workXP: 0,
 		money: 0,
 		radius: 0,
-		level: "starter",
 		time: {
 			month: 1,
 			week: 1,
 			year: 2010,
 		},
 		income: 0,
-		progress: 20,
+		progress: {
+			amount: 23,
+		},
 	});
+
+	const [activeCategory, setActiveCategory] = useState<ShortNames>("social");
 
 	const [showPopup, setShowPopup] = useState(false);
 	const [fakeBuyButtonText, setFakeBuyButtonText] = useState(false);
+
+	const onSelectCategory = (cat: ShortNames) => setActiveCategory(cat);
+
+	useEffect(() => {
+		const getCurrentEvolveState = evolveAt
+			.filter(
+				(evolve) => evolve.progressLevel < gameState.progress.amount
+			)
+			.at(-1);
+
+		setGameState({
+			...gameState,
+			progress: {
+				...gameState.progress,
+				...getCurrentEvolveState,
+			},
+		});
+	}, [gameState.progress.amount]);
 
 	useEffect(() => {
 		const t = setTimeout(() => {
@@ -106,7 +123,10 @@ function App() {
 					month: gameState.time.month + 1,
 				},
 				money: gameState.money + gameState.income,
-				progress: gameState.progress + progress - 5,
+				progress: {
+					...gameState.progress,
+					amount: gameState.progress.amount + progress - 5,
+				},
 			});
 	}, [gameState.time.week]);
 
@@ -124,14 +144,14 @@ function App() {
 	}, [gameState.time.month]);
 
 	useEffect(() => {
-		if (gameState.progress === 100) {
+		if (gameState.progress.amount === 100) {
 			// Stop the game, show dialog
 		}
-	}, [gameState.progress]);
+	}, [gameState.progress.amount]);
 
 	return (
 		<div className="App">
-			{gameState.progress === 100 && (
+			{gameState.progress.amount === 100 && (
 				<>
 					<Confetti
 						width={window.innerWidth}
@@ -145,78 +165,16 @@ function App() {
 							"#967bb6",
 						]}
 					/>
-					<dialog open={gameState.progress === 100}>
+					<dialog open={gameState.progress.amount === 100}>
 						<h1>Gedicht</h1>
 					</dialog>
 				</>
 			)}
 			<header>
-				<h1>Robin Schildmeijer</h1>
+				<Profile gameState={gameState} />
 				<section>
-					<strong>Level: {gameState.level}</strong>
-				</section>
-
-				<section>
-					<Meter
-						max={100}
-						value={gameState.progress}
-						text={`Uitpak meter: Als deze 100 haalt mag je je cadeau's uitpakken`}
-					/>
-				</section>
-				<section>
-					<Meter
-						max={51}
-						value={gameState.time.week}
-						text={`Week ${gameState.time.week}`}
-					/>
-					<Meter
-						max={11}
-						value={gameState.time.month}
-						text={`Maand ${months[gameState.time.month - 1]}`}
-					/>
-					<Meter
-						max={2022}
-						value={gameState.time.year}
-						text={`Jaar ${gameState.time.year}`}
-					/>
-				</section>
-
-				<section>
-					<strong>Status</strong>
-
-					<article>
-						<div>
-							<label>Levens ervaring:</label>
-							<span>{gameState.lifeXP}</span>
-						</div>
-						<div>
-							<label>Sociaal: </label>
-							<span>{gameState.socialXP}</span>
-						</div>
-						<div>
-							<label>Werk ervaring:</label>
-							<span>{gameState.workXP}</span>
-						</div>
-						<div>
-							<label>Bewegings radius:</label>
-							<span>{gameState.radius}</span>
-						</div>
-						<div>
-							<label>Geld:</label>
-							<span>€{gameState.money}</span>
-						</div>
-						<div>
-							Maandelijks inkomen:
-							<span>€{gameState.income}</span>
-						</div>
-					</article>
-
-					<section>
-						<span>Advertenties</span>
-						<button onClick={() => setShowPopup(true)}>
-							Kopen
-						</button>
-					</section>
+					<span>Advertenties</span>
+					<button onClick={() => setShowPopup(true)}>Kopen</button>
 				</section>
 			</header>
 
@@ -265,30 +223,58 @@ function App() {
 					</ul>
 				</dialog>
 			)}
-			<section>
-				<ul style={{ display: "flex" }}>
-					{data.game.categories.map((category) => (
-						<li>
-							<h1>{category.name}</h1>
-							{category.name === "werken" && (
-								<span>
-									Werk kun je eenmalig uitvoeren hierdoor
-									krijg je maandelijks inkomen
-								</span>
-							)}
-							<ul>
-								{category.items.map((item: Item) => (
-									<Option
-										category={category.name}
-										item={item}
-										gameState={gameState}
-										setGameState={setGameState}
-									/>
-								))}
-							</ul>
-						</li>
+			<section className="contentContainer">
+				<h1>Kies een categorie: </h1>
+				<div className="category-buttons">
+					{data.game.categories.map((cat) => (
+						<button
+							onClick={(e) => {
+								onSelectCategory(cat.shortName as ShortNames);
+							}}
+						>
+							{cat.name}
+						</button>
 					))}
-				</ul>
+				</div>
+				<h1>Voer een actie uit:</h1>
+				{data.game.categories.map((category) => (
+					<section
+						className={classnames("category", {
+							["showCategory"]:
+								category.shortName === activeCategory,
+						})}
+					>
+						<h1>{category.name}</h1>
+						<span>{category.description}</span>
+						<ul className="categoryOptions">
+							{category.items.map((item: Item) => (
+								<Option
+									category={category.name}
+									item={item}
+									gameState={gameState}
+									setGameState={setGameState}
+								/>
+							))}
+						</ul>
+					</section>
+				))}
+			</section>
+			<section className="timeContainer">
+				<Meter
+					max={51}
+					value={gameState.time.week}
+					text={`Week ${gameState.time.week}`}
+				/>
+				<Meter
+					max={11}
+					value={gameState.time.month}
+					text={`${months[gameState.time.month - 1]}`}
+				/>
+				<Meter
+					max={2022}
+					value={gameState.time.year}
+					text={`${gameState.time.year}`}
+				/>
 			</section>
 		</div>
 	);

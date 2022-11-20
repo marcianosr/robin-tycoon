@@ -1,0 +1,39 @@
+.profileContainer {
+	display: flex;
+	gap: 1rem;
+}
+
+.profile {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+	background-color: #ace1af;
+}
+
+.profileContainer > section {
+	/* background-color: lightgray; */
+	padding: 1rem;
+}
+
+.statItems {
+	display: flex;
+	gap: 0.5rem;
+	flex-wrap: wrap;
+}
+
+.statItems > div {
+	padding: 0.5rem;
+	border-radius: 0.5rem;
+}
+
+.statItems > div {
+	background-color: darkgray;
+}
+
+.stats {
+	/* width: 400px; */
+}
+
+.baseMeter > h3 {
+	margin-bottom: 0.5rem;
+	text-align: center;
+}
