@@ -30,50 +30,63 @@ export const evolveAt = [
 	},
 ];
 
-const Profile: FC<Props> = ({ gameState }) => (
-	<section className={styles.profileContainer}>
-		<section className={styles.profile}>
-			<div>
-				<strong>Level: {gameState.level}</strong>
-				<span>{gameState.progress.title}</span>
-			</div>
-			<div className={styles.baseMeter}>
-				<small>
-					Uitpakmeter: <strong>{gameState.progress.amount} </strong>
-				</small>
-				<Meter max={100} value={gameState.progress.amount} />
-			</div>
-		</section>
+const Profile: FC<Props> = ({ gameState }) => {
+	const progress = Math.round(
+		gameState.progress.amount +
+			(gameState.lifeXP + gameState.socialXP + gameState.workXP) / 10
+	);
 
-		<section className={styles.stats}>
-			<article className={styles.statItems}>
+	return (
+		<section className={styles.profileContainer}>
+			<section className={styles.profile}>
 				<div>
-					<span>Levens ervaring:</span>
-					<strong>{gameState.lifeXP}</strong>
+					<strong>Level: {gameState.level}</strong>
+					<span>{gameState.progress.title}</span>
 				</div>
-				<div>
-					<span>Sociaal: </span>
-					<strong>{gameState.socialXP}</strong>
+				<div className={styles.baseMeter}>
+					<small className={styles.uitpakText}>
+						<span className={styles.emoji}>🎁</span>
+						Uitpakmeter: <strong>{progress}</strong>{" "}
+						<span className={styles.emoji}>🎁</span>
+					</small>
+					<Meter max={100} value={progress} />
 				</div>
-				<div>
-					<span>Werk ervaring:</span>
-					<strong>{gameState.workXP}</strong>
-				</div>
-				<div>
-					<span>Bewegings radius:</span>
-					<strong>{gameState.radius}</strong>
-				</div>
-				<div>
-					<span>Geld:</span>
-					<strong>€{gameState.money}</strong>
-				</div>
-				<div>
-					<span>Maandelijks inkomen:</span>
-					<strong>€{gameState.income}</strong>
-				</div>
-			</article>
+			</section>
+
+			<section className={styles.stats}>
+				<article className={styles.statItems}>
+					<div>
+						<span>Levens ervaring:</span>
+						<strong>{gameState.lifeXP}</strong>
+					</div>
+					<div>
+						<span>Sociaal: </span>
+						<strong>{gameState.socialXP}</strong>
+					</div>
+					<div>
+						<span>Werk ervaring:</span>
+						<strong>{gameState.workXP}</strong>
+					</div>
+					<div>
+						<span>Bewegings radius:</span>
+						<strong>{gameState.radius}</strong>
+					</div>
+					<div>
+						<span>Geld:</span>
+						<strong>€{gameState.money}</strong>
+					</div>
+					<div>
+						<span>Maandelijks inkomen:</span>
+						<strong>€{gameState.income}</strong>
+					</div>
+					<div>
+						<span> Maandelijkse kosten</span>
+						<strong>€{gameState.costs}</strong>
+					</div>
+				</article>
+			</section>
 		</section>
-	</section>
-);
+	);
+};
 
 export default Profile;

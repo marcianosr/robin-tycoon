@@ -55,13 +55,17 @@ const ActionButton: FC<Props> = ({
 				return {
 					...prev,
 					money: gameStateValue + value.amount,
-					income: value.amount,
+					income: value.amount > 0 ? value.amount : gameStateValue,
+					costs: value.amount < 0 ? value.amount : gameStateValue,
 				};
 			}
 
 			return {
 				...prev,
 				[key]: gameStateValue + value,
+				progress: {
+					amount: gameState.progress.amount,
+				},
 			};
 		}, {});
 		setAmountOfActionsByCategory(amountOfActionsByCategory + 1);

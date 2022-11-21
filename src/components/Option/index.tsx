@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Item } from "../../App";
+import { Basis, Item } from "../../App";
 import ActionButton, { isEnabled } from "../ActionButton";
 import Meter from "../Meter";
 import styles from "./styles.module.css";
@@ -22,6 +22,14 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 		? `${process.env.PUBLIC_URL}/${item.imageURL}`
 		: item.imageURL;
 
+	const moneyTexts = {
+		monthly: "per maand",
+		weekly: "per week",
+		"per-action": "per keer",
+	};
+
+	const moneyBasisText = moneyTexts[item.earned.money?.basis as Basis];
+
 	return (
 		<li
 			className={classnames({
@@ -29,7 +37,7 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 			})}
 		>
 			<section className={styles.itemInner}>
-				<section>
+				<section className={styles.imageAndRequirements}>
 					<h2>{item.name}</h2>
 					{item.videoURL && (
 						<iframe
@@ -47,61 +55,24 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 						</div>
 					)}
 					{item.limit ? (
-						<Meter
-							max={item.limit.amount}
-							value={amountOfActionsByCategory}
-						/>
+						<div className={styles.notice}>
+							<strong>
+								Deze actie heeft een limiet
+								<span className={styles.emoji}>⚠️</span>
+							</strong>
+							<Meter
+								max={item.limit.amount}
+								value={amountOfActionsByCategory}
+							/>
+						</div>
 					) : (
-						<p>Ongelimiteerd</p>
+						<strong className={styles.notice}>
+							Deze actie is ongelimiteerd
+							<span className={styles.emoji}>🤑</span>
+						</strong>
 					)}
 
 					<section className={styles.requirements}>
-						<strong>Eisen voor deze actie:</strong>
-						{item.required && (
-							<ul className={styles.requirementsList}>
-								{Object.keys(item.required).length === 0 && (
-									<p>Geen vereisten</p>
-								)}
-								{item.required.lifeXP && (
-									<li>
-										<span>Levens ervaring: </span>
-										<strong>{item.required.lifeXP}</strong>
-									</li>
-								)}
-								{item.required.socialXP && (
-									<li>
-										<span>Sociale ervaring: </span>
-										<strong>
-											{item.required.socialXP}
-										</strong>
-									</li>
-								)}
-								{item.required.workXP && (
-									<li>
-										<span>Werk ervaring: </span>
-										<strong>{item.required.workXP}</strong>
-									</li>
-								)}
-								{item.required.radius && (
-									<li>
-										<span>Actieradius: </span>
-										<strong>{item.required.radius}</strong>
-									</li>
-								)}
-								{item.required.money && (
-									<li>
-										<span>
-											Je moet minimaal
-											<strong>
-												{" "}
-												€{item.required.money.amount}
-											</strong>{" "}
-											hebben verdiend{" "}
-										</span>
-									</li>
-								)}
-							</ul>
-						)}
 						<ActionButton
 							category={category}
 							amountOfActionsByCategory={
@@ -127,7 +98,10 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 						>
 							{item.earned.lifeXP < 0 && <span>Kosten: </span>}
 							<span>Levens ervaring: </span>
-							<strong>+{item.earned.lifeXP}</strong>
+							<strong>
+								{item.earned.lifeXP > 0 && "+"}
+								{item.earned.lifeXP}
+							</strong>
 						</div>
 					)}
 					{item.earned.socialXP && (
@@ -138,7 +112,10 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 							})}
 						>
 							<span>Sociale ervaring: </span>
-							<strong>+{item.earned.socialXP}</strong>
+							<strong>
+								{item.earned.socialXP > 0 && "+"}
+								{item.earned.socialXP}
+							</strong>
 						</div>
 					)}
 					{item.earned.workXP && (
@@ -149,7 +126,10 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 							})}
 						>
 							<span>Werk ervaring: </span>
-							<strong>+{item.earned.workXP}</strong>
+							<strong>
+								{item.earned.workXP > 0 && "+"}
+								{item.earned.workXP}
+							</strong>
 						</div>
 					)}
 					{item.earned.radius && (
@@ -167,16 +147,110 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 							})}
 						>
 							<span>Geld: </span>
-							<strong>{item.earned.money.amount}</strong>
+							<strong>
+								{item.earned.money.amount > 0 && "+"}
+								{item.earned.money.amount}
+							</strong>
+							{item.earned.money.basis && (
+								<span> {moneyBasisText}</span>
+							)}
 						</div>
 					)}
 				</section>
 			</section>
 			{!isItemEnabled && (
-				<span className={styles.unlockText}>
-					<span className={styles.lockIcon}>🔒</span>
-					<span>Nog niet vrijgespeeld</span>
-				</span>
+				<div className={styles.unlockContainer}>
+					<span className={styles.unlockText}>
+						<span>Niet genoeg voor deze actie</span>
+						<span className={styles.lockIcon}>🔒</span>
+					</span>
+					<section className={styles.requirements}>
+						<span>
+							Om actie <strong>"{item.name}"</strong> vrij te
+							spelen heb je nodig:
+						</span>
+						{item.required && (
+							<ul className={styles.requirementsList}>
+								{Object.keys(item.required).length === 0 && (
+									<p>Geen vereisten</p>
+								)}
+								{item.required.lifeXP && (
+									<li>
+										<span>Levens ervaring: </span>
+										<strong>{item.required.lifeXP}</strong>
+										<span>
+											{" "}
+											{gameState.lifeXP >=
+											item.required.lifeXP
+												? "✅"
+												: "❌"}
+										</span>
+									</li>
+								)}
+								{item.required.socialXP && (
+									<li>
+										<span>Sociale ervaring: </span>
+										<strong>
+											{item.required.socialXP}
+										</strong>
+										<span>
+											{" "}
+											{gameState.socialXP >=
+											item.required.socialXP
+												? "✅"
+												: "❌"}
+										</span>
+									</li>
+								)}
+								{item.required.workXP && (
+									<li>
+										<span>Werk ervaring: </span>
+										<strong>{item.required.workXP}</strong>
+										<span>
+											{" "}
+											{gameState.workXP >=
+											item.required.workXP
+												? "✅"
+												: "❌"}
+										</span>
+									</li>
+								)}
+								{item.required.radius && (
+									<li>
+										<span>Actieradius: </span>
+										<strong>{item.required.radius}</strong>
+										<span>
+											{" "}
+											{gameState.radius >=
+											item.required.radius
+												? "✅"
+												: "❌"}
+										</span>
+									</li>
+								)}
+								{item.required.money && (
+									<li>
+										<span>
+											Je moet minimaal
+											<strong>
+												{" "}
+												€{item.required.money.amount}
+											</strong>{" "}
+											hebben verdiend{" "}
+											<span>
+												{" "}
+												{gameState.money.amount >=
+												item.required.money.amount
+													? "✅"
+													: "❌"}
+											</span>
+										</span>
+									</li>
+								)}
+							</ul>
+						)}
+					</section>
+				</div>
 			)}
 		</li>
 	);

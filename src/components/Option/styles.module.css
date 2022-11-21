@@ -52,6 +52,7 @@ button {
 .requirementsList {
 	list-style-type: circle;
 	padding-left: 1rem;
+	margin-top: 1rem;
 }
 
 .itemInner {
@@ -61,7 +62,7 @@ button {
 }
 
 .disableItem > .itemInner {
-	opacity: 0.25;
+	opacity: 0.1;
 }
 
 .disableItem {
@@ -69,15 +70,44 @@ button {
 	position: relative;
 }
 
-.unlockText {
+.unlockContainer {
 	position: absolute;
+	padding: 1rem;
+	left: 0;
+	top: 0;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.unlockText {
 	font-size: 2rem;
 	font-weight: 800;
-	top: 50%;
 	display: flex;
 	align-items: center;
 }
 
 .lockIcon {
 	font-size: 5rem;
+}
+
+.imageAndRequirements {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+.notice {
+	padding: 0.25rem 1rem;
+	background-color: rgb(255, 242, 171);
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.emoji {
+	font-size: 2rem;
 }

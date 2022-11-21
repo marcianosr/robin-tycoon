@@ -14,7 +14,7 @@ export type XP = {
 	radius?: number;
 };
 
-type Basis = "monthly" | "weekly";
+export type Basis = "monthly" | "weekly" | "per-action";
 
 type Money = {
 	amount: number;
@@ -70,12 +70,14 @@ function App() {
 			year: 2010,
 		},
 		income: 0,
+		costs: 0,
 		progress: {
 			amount: 23,
 		},
+		won: false,
 	});
 
-	const [activeCategory, setActiveCategory] = useState<ShortNames>("social");
+	const [activeCategory, setActiveCategory] = useState<ShortNames>("living");
 
 	const [showPopup, setShowPopup] = useState(false);
 	const [fakeBuyButtonText, setFakeBuyButtonText] = useState(false);
@@ -100,11 +102,17 @@ function App() {
 
 	useEffect(() => {
 		const t = setTimeout(() => {
-			setGameState({
-				...gameState,
-				time: { ...gameState.time, week: gameState.time.week + 1 },
-			});
-		}, 8500);
+			if (!gameState.won) {
+				setGameState({
+					...gameState,
+					time: { ...gameState.time, week: gameState.time.week + 1 },
+					progress: {
+						...gameState.progress,
+						amount: gameState.progress.amount - 2,
+					},
+				});
+			}
+		}, 4000);
 
 		return () => {
 			clearTimeout(t);
@@ -112,26 +120,19 @@ function App() {
 	}, [gameState]);
 
 	useEffect(() => {
-		const progress =
-			gameState.lifeXP + gameState.socialXP + gameState.workXP;
-
-		if (gameState.time.week % 4 === 0)
+		if (gameState.time.week % 4 === 0 && !gameState.won)
 			setGameState({
 				...gameState,
 				time: {
 					...gameState.time,
 					month: gameState.time.month + 1,
 				},
-				money: gameState.money + gameState.income,
-				progress: {
-					...gameState.progress,
-					amount: gameState.progress.amount + progress - 5,
-				},
+				money: gameState.money + gameState.income + gameState.costs,
 			});
 	}, [gameState.time.week]);
 
 	useEffect(() => {
-		if (gameState.time.week % 52 === 0)
+		if (gameState.time.week % 52 === 0 && !gameState.won)
 			setGameState({
 				...gameState,
 				time: {
@@ -146,12 +147,26 @@ function App() {
 	useEffect(() => {
 		if (gameState.progress.amount === 100) {
 			// Stop the game, show dialog
+
+			winGame();
 		}
 	}, [gameState.progress.amount]);
 
+	const winGame = () =>
+		setGameState({
+			...gameState,
+			won: true,
+			progress: {
+				amount: 100,
+			},
+		});
+
 	return (
 		<div className="App">
-			{gameState.progress.amount === 100 && (
+			<button style={{ display: "none" }} onClick={winGame}>
+				Cheat
+			</button>
+			{gameState.progress.amount >= 100 && (
 				<>
 					<Confetti
 						width={window.innerWidth}
@@ -172,10 +187,6 @@ function App() {
 			)}
 			<header>
 				<Profile gameState={gameState} />
-				<section>
-					<span>Advertenties</span>
-					<button onClick={() => setShowPopup(true)}>Kopen</button>
-				</section>
 			</header>
 
 			{showPopup && (
@@ -184,12 +195,15 @@ function App() {
 						<li>
 							{!fakeBuyButtonText && (
 								<article>
-									<span>Levens elixer</span>
 									<span>
-										+100 sociale XP en +100 levens ervaring
+										Elixer pakket: sociale ervaring elixer
+										en levens ervaring elixer
 									</span>
 									<span>
-										5 euro (via iDeal)
+										+500 sociale XP en +500 levens ervaring
+									</span>
+									<span>
+										2,50 euro (via iDeal)
 										<img
 											width={40}
 											height={40}
@@ -258,6 +272,10 @@ function App() {
 						</ul>
 					</section>
 				))}
+			</section>
+			<section>
+				<span>Advertenties</span>
+				<button onClick={() => setShowPopup(true)}>Kopen</button>
 			</section>
 			<section className="timeContainer">
 				<Meter
