@@ -23,6 +23,10 @@ h3 {
 	left: 0;
 }
 
+.time {
+	display: flex;
+}
+
 .categoryOptions {
 	display: grid;
 	grid-auto-columns: 1fr;
@@ -54,7 +58,7 @@ h3 {
 	border: 1px solid rgb(169, 169, 169);
 	border-radius: 0.5rem;
 	padding: 1rem;
-	margin-top: 2rem;
+	margin-top: 1rem;
 	margin-bottom: 2rem;
 }
 
@@ -69,6 +73,16 @@ h3 {
 .category-buttons {
 	display: flex;
 	gap: 1rem;
+}
+
+.category-container-buttons {
+	padding-bottom: 1rem;
+	align-items: center;
+	gap: 1rem;
+	display: flex;
 	border-bottom: 1px dashed rgb(169, 169, 169);
-	padding-bottom: 2rem;
+}
+
+.category-container-buttons h1 {
+	margin: 0;
 }

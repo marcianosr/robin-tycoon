@@ -10,23 +10,23 @@ type Props = {
 export const evolveAt = [
 	{
 		title: "Kluizenaar",
-		progressLevel: 0,
+		progress: 0,
 	},
 	{
 		title: "Starter",
-		progressLevel: 16,
+		progress: 16,
 	},
 	{
 		title: "Pakt de draad op",
-		progressLevel: 30,
+		progress: 30,
 	},
 	{
 		title: "Mogelijkheden in het leven en vindt zijn weg",
-		progressLevel: 52,
+		progress: 52,
 	},
 	{
 		title: "Stabiliteit en geniet van het leven",
-		progressLevel: 70,
+		progress: 70,
 	},
 ];
 
@@ -46,10 +46,11 @@ const Profile: FC<Props> = ({ gameState }) => {
 				<div className={styles.baseMeter}>
 					<small className={styles.uitpakText}>
 						<span className={styles.emoji}>🎁</span>
-						Uitpakmeter: <strong>{progress}</strong>{" "}
+						Uitpakmeter:{" "}
+						<strong>{gameState.progress.amount}</strong>{" "}
 						<span className={styles.emoji}>🎁</span>
 					</small>
-					<Meter max={100} value={progress} />
+					<Meter max={100} value={gameState.progress.amount} />
 				</div>
 			</section>
 
@@ -67,6 +68,8 @@ const Profile: FC<Props> = ({ gameState }) => {
 						<span>Werk ervaring:</span>
 						<strong>{gameState.workXP}</strong>
 					</div>
+				</article>
+				<article className={styles.statItems}>
 					<div>
 						<span>Bewegings radius:</span>
 						<strong>{gameState.radius}</strong>

@@ -41,8 +41,17 @@ const ActionButton: FC<Props> = ({
 
 	const action = (item: Item) => {
 		const values = Object.entries(item.earned);
+		const progressValue = values.reduce((acc, [key, value]: [any, any]) => {
+			if (key === "lifeXP" || key === "socialXP" || key === "workXP") {
+				return Math.round((acc + value) / 10);
+			}
+
+			return acc;
+		}, 0);
+
 		const updated = values.reduce((prev, [key, value]) => {
 			const gameStateValue = gameState[key as keyof XP];
+			// const progressValue = Math.round(2);
 
 			if (key === "radius") {
 				return {
@@ -52,22 +61,29 @@ const ActionButton: FC<Props> = ({
 			}
 
 			if (key === "money" && typeof value !== "number") {
+				console.log("value", value, item.name);
 				return {
 					...prev,
 					money: gameStateValue + value.amount,
 					income: value.amount > 0 ? value.amount : gameStateValue,
-					costs: value.amount < 0 ? value.amount : gameStateValue,
+					costs: value.amount < 0 ? value.amount : gameState.costs,
 				};
 			}
 
 			return {
 				...prev,
 				[key]: gameStateValue + value,
+				actionsActive: [
+					...gameState.actionsActive,
+					{ name: item.name, isRunning: true },
+				],
 				progress: {
-					amount: gameState.progress.amount,
+					...gameState.progress,
+					amount: gameState.progress.amount + progressValue,
 				},
 			};
 		}, {});
+
 		setAmountOfActionsByCategory(amountOfActionsByCategory + 1);
 		setTimerActive(true);
 		setGameState({
@@ -75,6 +91,31 @@ const ActionButton: FC<Props> = ({
 			...updated,
 		});
 	};
+
+	useEffect(() => {
+		if (gameState.actionsActive.length > 0) {
+			console.log(item.name);
+
+			const remove = gameState.actionsActive.find(
+				(action: any) => action.name === item.name
+			);
+
+			// setGameState({
+			// 	...gameState,
+			// 	actionsActive: [
+			// 		...gameState.actionsActive,
+			// 	]
+			// })
+
+			// console.log(remove, "2322");
+		}
+
+		// setGameState(
+		// 	gameState.actionsActive.filter(
+		// 		(action: string) => action === item.name
+		// 	)
+		// );
+	}, [timerActive]);
 
 	return (
 		<button

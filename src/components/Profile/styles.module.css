@@ -18,6 +18,11 @@
 	display: flex;
 	gap: 0.5rem;
 	flex-wrap: wrap;
+	/* flex-direction: column; */
+}
+
+.statItems:last-child {
+	justify-content: end;
 }
 
 .statItems > div {
@@ -31,6 +36,10 @@
 
 .stats {
 	/* width: 400px; */
+	display: flex;
+	gap: 0.5rem;
+	justify-content: space-between;
+	width: 100%;
 }
 
 .baseMeter > h3 {

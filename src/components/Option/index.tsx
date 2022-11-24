@@ -148,11 +148,16 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 						>
 							<span>Geld: </span>
 							<strong>
-								{item.earned.money.amount > 0 && "+"}
+								€{item.earned.money.amount > 0 && "+"}
 								{item.earned.money.amount}
 							</strong>
-							{item.earned.money.basis && (
+							{item.earned.money.basis ? (
 								<span> {moneyBasisText}</span>
+							) : (
+								<span>
+									{" "}
+									Bedrag wordt per keer bij/afgeschreven
+								</span>
 							)}
 						</div>
 					)}

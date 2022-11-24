@@ -10,10 +10,10 @@
 						"name": "Kornet bij Crescendo",
 						"imageURL": "robin-cornet.png",
 						"earned": {
-							"socialXP": 50,
-							"lifeXP": 10,
+							"socialXP": 75,
+							"lifeXP": 25,
 							"money": {
-								"amount": -15,
+								"amount": -10,
 								"basis": "monthly"
 							}
 						},
@@ -24,38 +24,25 @@
 								"amount": 15
 							}
 						},
-						"cooldown": 100
-					},
-					{
-						"name": "Maand abbo bij de sportschool",
-						"imageURL": "robin-gym.jpeg",
-						"required": {
-							"socialXP": 10,
-							"money": {
-								"amount": 50
-							}
+						"limit": {
+							"amount": 1
 						},
-						"earned": {
-							"money": {
-								"amount": -30,
-								"basis": "monthly"
-							}
-						},
-						"cooldown": 100
+						"cooldown": 40
 					},
-
 					{
 						"name": "ff gym pakken",
 						"imageURL": "robin-gym.jpeg",
 						"required": {
-							"socialXP": 50
+							"socialXP": 50,
+							"money": {
+								"amount": 10
+							}
 						},
 						"earned": {
 							"socialXP": 50
 						},
 						"cooldown": 100
 					},
-
 					{
 						"name": "Potje League of Legends met Martijn",
 						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/487779_339938256122089_1105893052_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f9d7a1&_nc_ohc=tjaa8YhTr-QAX8r4_hB&_nc_ht=scontent-ams4-1.xx&oh=00_AfD4-FLNwoc9Fm3_-RUrbvPD6Ck7Sn3Oa9gcEIyfnmLiTQ&oe=63A17E99",
@@ -66,38 +53,49 @@
 						"required": {
 							"socialXP": 10
 						},
-						"cooldown": 25
+						"cooldown": 7
+					},
+					{
+						"name": "League of Legends skins kopen",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/487779_339938256122089_1105893052_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f9d7a1&_nc_ohc=tjaa8YhTr-QAX8r4_hB&_nc_ht=scontent-ams4-1.xx&oh=00_AfD4-FLNwoc9Fm3_-RUrbvPD6Ck7Sn3Oa9gcEIyfnmLiTQ&oe=63A17E99",
+						"earned": {
+							"socialXP": 5,
+							"money": {
+								"amount": -5
+							}
+						},
+						"cooldown": 50
 					},
 					{
 						"name": "Advies vragen van thuis",
 						"earned": {
-							"socialXP": 20,
-							"lifeXP": 200
+							"socialXP": 10,
+							"lifeXP": 50
 						},
 						"required": {
 							"socialXP": 10
 						},
-						"cooldown": 200
+						"cooldown": 30
 					},
 					{
 						"name": "Op bezoek gaan bij opa en oma",
 						"earned": {
-							"socialXP": 50,
-							"lifeXP": 200
+							"socialXP": 20,
+							"lifeXP": 20
 						},
 						"required": {
 							"socialXP": 10
 						},
-						"cooldown": 200
+						"cooldown": 70
 					},
 					{
 						"name": "Vrienden maken",
 						"imageURL": "https://scontent-ams2-1.xx.fbcdn.net/v/t1.18169-9/1231653_10200580608424726_805898821_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=nunuioUKrFkAX9IPLm4&_nc_ht=scontent-ams2-1.xx&oh=00_AfB6_xMdYJ4mMoTYW9u4nmdMFVbfX77EJC-W9rzSslvaTw&oe=63A17ADA",
 						"earned": {
-							"socialXP": 100
+							"socialXP": 30
 						},
 						"required": {
-							"socialXP": 200
+							"socialXP": 100
 						},
 						"cooldown": 50,
 						"limit": {
@@ -110,14 +108,15 @@
 						"earned": {
 							"socialXP": 150,
 							"lifeXP": 50,
-							"workXP": -50,
+							"workXP": -75,
 							"money": {
 								"amount": -50
 							}
 						},
 						"required": {
 							"money": {
-								"amount": 100
+								"amount": 100,
+								"basis": "per-action"
 							},
 							"socialXP": 100
 						},
@@ -127,30 +126,36 @@
 						"name": "Verzorging",
 						"imageURL": "robin-fashion.jpeg",
 						"earned": {
-							"socialXP": 20,
+							"socialXP": 30,
 							"money": {
-								"amount": -10
+								"amount": -10,
+								"basis": "per-action"
 							}
 						},
 						"required": {
 							"socialXP": 10,
 							"money": {
-								"amount": 20
+								"amount": 10
 							}
 						},
-						"cooldown": 50
+						"cooldown": 30
 					},
 					{
 						"name": "Cézanne",
 						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/11220111_916651291729982_7136581538902823497_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=g-rbLWtSLWMAX8cHSn_&_nc_ht=scontent-ams4-1.xx&oh=00_AfAtm62uVsgMnxBSR_NjnJ2Kn10qiYXcIg8bxofp6IBWvQ&oe=63A177B7",
 						"earned": {
-							"socialXP": 200,
-							"lifeXP": 200
+							"socialXP": 325,
+							"lifeXP": 325,
+							"workXP": -100,
+							"money": {
+								"amount": -30,
+								"basis": "monthly"
+							}
 						},
 						"required": {
-							"socialXP": 500,
-							"lifeXP": 500,
-							"money": 500,
+							"socialXP": 300,
+							"lifeXP": 300,
+							"money": 250,
 							"radius": 100
 						},
 						"cooldown": 0,
@@ -187,17 +192,17 @@
 						"imageURL": "robin-tekenen.jpeg",
 						"earned": {
 							"workXP": 25,
-							"socialXP": -10
+							"socialXP": -25
 						},
-						"cooldown": 30
+						"cooldown": 20
 					},
 					{
 						"name": "BODO Pompstation",
 						"imageURL": "https://topbakverhuur.nl/wp-content/uploads/2018/03/Avia-Amsterdam-Appelweg-46.png",
 						"earned": {
 							"workXP": 50,
-							"lifeXP": 50,
-							"socialXP": 50,
+							"lifeXP": 25,
+							"socialXP": -50,
 							"money": {
 								"amount": 50,
 								"basis": "monthly"
@@ -216,18 +221,18 @@
 					{
 						"name": "Stagiair bij RI Print & Sign",
 						"earned": {
-							"workXP": 90,
+							"workXP": 120,
 							"lifeXP": 90,
-							"socialXP": 75,
+							"socialXP": 10,
 							"money": {
 								"amount": 125,
 								"basis": "monthly"
 							}
 						},
 						"required": {
-							"socialXP": 130,
-							"lifeXP": 130,
-							"workXP": 130,
+							"socialXP": 75,
+							"lifeXP": 50,
+							"workXP": 100,
 							"radius": 150
 						},
 						"limit": {
@@ -236,12 +241,33 @@
 						"cooldown": 0
 					},
 					{
+						"name": "ff bijklussen",
+						"imageURL": "https://topbakverhuur.nl/wp-content/uploads/2018/03/Avia-Amsterdam-Appelweg-46.png",
+						"earned": {
+							"workXP": 50,
+							"lifeXP": 25,
+							"socialXP": 25,
+							"money": {
+								"amount": 25
+							}
+						},
+						"required": {
+							"socialXP": 20,
+							"lifeXP": 20,
+							"radius": 50
+						},
+						"cooldown": 0,
+						"limit": {
+							"amount": 1
+						}
+					},
+					{
 						"name": "Design bij Coqtail",
 						"videoURL": "https://www.facebook.com/jeffrey.beckers/videos/2974491055947757",
 						"earned": {
-							"workXP": 125,
-							"lifeXP": 150,
-							"socialXP": 100,
+							"workXP": 225,
+							"lifeXP": 175,
+							"socialXP": 50,
 							"money": {
 								"amount": 275,
 								"basis": "monthly"
@@ -251,9 +277,9 @@
 							"amount": 1
 						},
 						"required": {
-							"socialXP": 200,
-							"lifeXP": 200,
-							"workXP": 150,
+							"socialXP": 150,
+							"lifeXP": 120,
+							"workXP": 220,
 							"radius": 500
 						},
 						"cooldown": 0
@@ -262,9 +288,9 @@
 						"name": "Art Director @ Emakina",
 						"imageURL": "robin-art-director.jpeg",
 						"earned": {
-							"workXP": 300,
-							"lifeXP": 200,
-							"socialXP": 100,
+							"workXP": 450,
+							"lifeXP": 250,
+							"socialXP": 50,
 							"money": {
 								"amount": 600
 							}
@@ -274,8 +300,8 @@
 						},
 						"required": {
 							"socialXP": 250,
-							"lifeXP": 325,
-							"workXP": 350,
+							"lifeXP": 350,
+							"workXP": 410,
 							"radius": 1500
 						},
 						"cooldown": 0
@@ -316,7 +342,10 @@
 						"earned": {
 							"lifeXP": 50,
 							"socialXP": 10,
-							"radius": 650
+							"radius": 650,
+							"money": {
+								"amount": -25
+							}
 						},
 						"required": {
 							"money": {
@@ -330,13 +359,16 @@
 					{
 						"name": "Renault Clio",
 						"earned": {
-							"socialXP": 100,
+							"socialXP": 200,
 							"lifeXP": 200,
-							"radius": 1500
+							"radius": 1500,
+							"money": {
+								"amount": -100,
+								"basis": "monthly"
+							}
 						},
 						"required": {
 							"money": {
-								"basis": "monthly",
 								"amount": 500
 							},
 							"lifeXP": 500
@@ -355,6 +387,24 @@
 						"earned": {
 							"lifeXP": 10,
 							"socialXP": 10
+						},
+						"cooldown": 0,
+						"limit": {
+							"amount": 1
+						}
+					},
+					{
+						"name": "Wonen in de Notenkraker",
+						"earned": {
+							"lifeXP": 20,
+							"money": {
+								"amount": -1,
+								"basis": "monthly"
+							}
+						},
+						"required": {
+							"lifeXP": 1,
+							"socialXP": 1
 						},
 						"cooldown": 0,
 						"limit": {

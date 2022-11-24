@@ -73,8 +73,10 @@ function App() {
 		costs: 0,
 		progress: {
 			amount: 23,
+			title: "Starter",
 		},
 		won: false,
+		actionsActive: [],
 	});
 
 	const [activeCategory, setActiveCategory] = useState<ShortNames>("living");
@@ -86,9 +88,7 @@ function App() {
 
 	useEffect(() => {
 		const getCurrentEvolveState = evolveAt
-			.filter(
-				(evolve) => evolve.progressLevel < gameState.progress.amount
-			)
+			.filter((evolve) => evolve.progress < gameState.progress.amount)
 			.at(-1);
 
 		setGameState({
@@ -108,11 +108,14 @@ function App() {
 					time: { ...gameState.time, week: gameState.time.week + 1 },
 					progress: {
 						...gameState.progress,
-						amount: gameState.progress.amount - 2,
+						amount:
+							gameState.progress.amount > 0
+								? gameState.progress.amount - 1
+								: gameState.progress.amount,
 					},
 				});
 			}
-		}, 4000);
+		}, 6000);
 
 		return () => {
 			clearTimeout(t);
@@ -157,10 +160,10 @@ function App() {
 			...gameState,
 			won: true,
 			progress: {
+				...gameState.progress,
 				amount: 100,
 			},
 		});
-
 	return (
 		<div className="App">
 			<button style={{ display: "none" }} onClick={winGame}>
@@ -238,17 +241,21 @@ function App() {
 				</dialog>
 			)}
 			<section className="contentContainer">
-				<h1>Kies een categorie: </h1>
-				<div className="category-buttons">
-					{data.game.categories.map((cat) => (
-						<button
-							onClick={(e) => {
-								onSelectCategory(cat.shortName as ShortNames);
-							}}
-						>
-							{cat.name}
-						</button>
-					))}
+				<div className="category-container-buttons">
+					<h1>Kies een categorie: </h1>
+					<div className="category-buttons">
+						{data.game.categories.map((cat) => (
+							<button
+								onClick={(e) => {
+									onSelectCategory(
+										cat.shortName as ShortNames
+									);
+								}}
+							>
+								{cat.name}
+							</button>
+						))}
+					</div>
 				</div>
 				<h1>Voer een actie uit:</h1>
 				{data.game.categories.map((category) => (
@@ -278,21 +285,28 @@ function App() {
 				<button onClick={() => setShowPopup(true)}>Kopen</button>
 			</section>
 			<section className="timeContainer">
-				<Meter
-					max={51}
-					value={gameState.time.week}
-					text={`Week ${gameState.time.week}`}
-				/>
-				<Meter
-					max={11}
-					value={gameState.time.month}
-					text={`${months[gameState.time.month - 1]}`}
-				/>
-				<Meter
-					max={2022}
-					value={gameState.time.year}
-					text={`${gameState.time.year}`}
-				/>
+				<div className="running-actions">
+					{/* {gameState.actionsActive.map((item) => (
+						<span>{item.name}</span>
+					))} */}
+				</div>
+				<div className="time">
+					<Meter
+						max={51}
+						value={gameState.time.week}
+						text={`Week ${gameState.time.week}`}
+					/>
+					<Meter
+						max={11}
+						value={gameState.time.month}
+						text={`${months[gameState.time.month - 1]}`}
+					/>
+					<Meter
+						max={2022}
+						value={gameState.time.year}
+						text={`${gameState.time.year}`}
+					/>
+				</div>
 			</section>
 		</div>
 	);
