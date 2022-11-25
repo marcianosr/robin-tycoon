@@ -12,6 +12,7 @@
 						"earned": {
 							"socialXP": 75,
 							"lifeXP": 25,
+							"workXP": -25,
 							"money": {
 								"amount": -10,
 								"basis": "monthly"
@@ -39,7 +40,8 @@
 							}
 						},
 						"earned": {
-							"socialXP": 50
+							"socialXP": 50,
+							"workXP": -15
 						},
 						"cooldown": 100
 					},
@@ -53,29 +55,38 @@
 						"required": {
 							"socialXP": 10
 						},
-						"cooldown": 7
+						"cooldown": 25
 					},
 					{
-						"name": "League of Legends skins kopen",
+						"name": "Abbo kopen op League of Legends skins",
 						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/487779_339938256122089_1105893052_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f9d7a1&_nc_ohc=tjaa8YhTr-QAX8r4_hB&_nc_ht=scontent-ams4-1.xx&oh=00_AfD4-FLNwoc9Fm3_-RUrbvPD6Ck7Sn3Oa9gcEIyfnmLiTQ&oe=63A17E99",
 						"earned": {
 							"socialXP": 5,
 							"money": {
-								"amount": -5
+								"amount": -5,
+								"basis": "monthly"
 							}
 						},
-						"cooldown": 50
+						"required": {
+							"money": {
+								"amount": 5
+							}
+						},
+						"limit": {
+							"amount": 1
+						},
+						"cooldown": 35
 					},
 					{
 						"name": "Advies vragen van thuis",
 						"earned": {
-							"socialXP": 10,
-							"lifeXP": 50
+							"socialXP": 5,
+							"lifeXP": 5
 						},
 						"required": {
 							"socialXP": 10
 						},
-						"cooldown": 30
+						"cooldown": 50
 					},
 					{
 						"name": "Op bezoek gaan bij opa en oma",
@@ -86,7 +97,7 @@
 						"required": {
 							"socialXP": 10
 						},
-						"cooldown": 70
+						"cooldown": 150
 					},
 					{
 						"name": "Vrienden maken",
@@ -129,7 +140,7 @@
 							"socialXP": 30,
 							"money": {
 								"amount": -10,
-								"basis": "per-action"
+								"basis": "monthly"
 							}
 						},
 						"required": {
@@ -138,6 +149,7 @@
 								"amount": 10
 							}
 						},
+						"limit": { "amount": 1 },
 						"cooldown": 30
 					},
 					{
@@ -191,7 +203,7 @@
 						"name": "Tekenen / Designs maken",
 						"imageURL": "robin-tekenen.jpeg",
 						"earned": {
-							"workXP": 25,
+							"workXP": 40,
 							"socialXP": -25
 						},
 						"cooldown": 20
@@ -221,7 +233,7 @@
 					{
 						"name": "Stagiair bij RI Print & Sign",
 						"earned": {
-							"workXP": 120,
+							"workXP": 90,
 							"lifeXP": 90,
 							"socialXP": 10,
 							"money": {
@@ -246,7 +258,7 @@
 						"earned": {
 							"workXP": 50,
 							"lifeXP": 25,
-							"socialXP": 25,
+							"socialXP": -25,
 							"money": {
 								"amount": 25
 							}
@@ -254,11 +266,12 @@
 						"required": {
 							"socialXP": 20,
 							"lifeXP": 20,
+							"workXP": 100,
 							"radius": 50
 						},
 						"cooldown": 0,
 						"limit": {
-							"amount": 1
+							"amount": 2
 						}
 					},
 					{
@@ -319,7 +332,10 @@
 							"socialXP": 10,
 							"radius": 25
 						},
-						"cooldown": 10
+						"cooldown": 10,
+						"limit": {
+							"amount": 1
+						}
 					},
 					{
 						"name": "Fietsen",
@@ -334,6 +350,9 @@
 								"amount": 25
 							},
 							"lifeXP": 25
+						},
+						"limit": {
+							"amount": 1
 						},
 						"cooldown": 20
 					},
@@ -354,6 +373,9 @@
 							},
 							"lifeXP": 100
 						},
+						"limit": {
+							"amount": 1
+						},
 						"cooldown": 50
 					},
 					{
@@ -366,6 +388,9 @@
 								"amount": -100,
 								"basis": "monthly"
 							}
+						},
+						"limit": {
+							"amount": 1
 						},
 						"required": {
 							"money": {
@@ -404,7 +429,10 @@
 						},
 						"required": {
 							"lifeXP": 1,
-							"socialXP": 1
+							"socialXP": 1,
+							"money": {
+								"amount": 1
+							}
 						},
 						"cooldown": 0,
 						"limit": {

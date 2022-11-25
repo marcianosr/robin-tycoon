@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Item, RequirementEarned, XP } from "../../App";
 import CountDown from "../CountDown";
 
@@ -7,6 +7,7 @@ type Props = {
 	item: Item;
 	gameState: any;
 	setGameState: any;
+	numberOfItems: number;
 	amountOfActionsByCategory: number;
 	setAmountOfActionsByCategory: (n: number) => void;
 };
@@ -36,22 +37,17 @@ const ActionButton: FC<Props> = ({
 	setGameState,
 	amountOfActionsByCategory,
 	setAmountOfActionsByCategory,
+	numberOfItems,
 }) => {
 	const [timerActive, setTimerActive] = useState(false);
 
 	const action = (item: Item) => {
 		const values = Object.entries(item.earned);
-		const progressValue = values.reduce((acc, [key, value]: [any, any]) => {
-			if (key === "lifeXP" || key === "socialXP" || key === "workXP") {
-				return Math.round((acc + value) / 10);
-			}
-
-			return acc;
-		}, 0);
+		const unlockedItems = gameState.unlockedItems.length + 1;
+		const progressValue = Math.round((unlockedItems / numberOfItems) * 100);
 
 		const updated = values.reduce((prev, [key, value]) => {
 			const gameStateValue = gameState[key as keyof XP];
-			// const progressValue = Math.round(2);
 
 			if (key === "radius") {
 				return {
@@ -61,26 +57,62 @@ const ActionButton: FC<Props> = ({
 			}
 
 			if (key === "money" && typeof value !== "number") {
-				console.log("value", value, item.name);
 				return {
 					...prev,
 					money: gameStateValue + value.amount,
 					income: value.amount > 0 ? value.amount : gameStateValue,
-					costs: value.amount < 0 ? value.amount : gameState.costs,
+					costs:
+						value.amount < 0
+							? gameState.costs + value.amount
+							: gameState.costs,
 				};
 			}
+
+			const hasUnlockedItem = gameState.unlockedItems.find(
+				(found: Item) => found.name === item.name
+			);
+
+			// const categoryWithItems = gameState.data.find(
+			// 	(c: any) => c.name === category
+			// );
+
+			// const otherCategories = gameState.data.filter(
+			// 	(c: any) => c.name !== category
+			// );
+
+			// const removedItem = categoryWithItems.items.find(
+			// 	(i: Item) => i.name === item.name
+			// );
+
+			// const updatedItems = categoryWithItems.items.filter((i: Item) => {
+			// 	console.log(i.name, amountOfActionsByCategory);
+
+			// 	return i;
+			// 	// return (
+			// 	// i.name !== removedItem.name
+			// 	// && i.limit?.amount === amountOfActionsByCategory
+			// 	// );
+			// });
+
+			// const updatedState = [
+			// 	...otherCategories,
+			// 	{
+			// 		...categoryWithItems,
+			// 		items: updatedItems,
+			// 	},
+			// ];
 
 			return {
 				...prev,
 				[key]: gameStateValue + value,
-				actionsActive: [
-					...gameState.actionsActive,
-					{ name: item.name, isRunning: true },
-				],
 				progress: {
 					...gameState.progress,
-					amount: gameState.progress.amount + progressValue,
+					amount: progressValue,
 				},
+				// data: updatedState,
+				unlockedItems: !hasUnlockedItem
+					? [...gameState.unlockedItems, item]
+					: gameState.unlockedItems,
 			};
 		}, {});
 
@@ -91,31 +123,6 @@ const ActionButton: FC<Props> = ({
 			...updated,
 		});
 	};
-
-	useEffect(() => {
-		if (gameState.actionsActive.length > 0) {
-			console.log(item.name);
-
-			const remove = gameState.actionsActive.find(
-				(action: any) => action.name === item.name
-			);
-
-			// setGameState({
-			// 	...gameState,
-			// 	actionsActive: [
-			// 		...gameState.actionsActive,
-			// 	]
-			// })
-
-			// console.log(remove, "2322");
-		}
-
-		// setGameState(
-		// 	gameState.actionsActive.filter(
-		// 		(action: string) => action === item.name
-		// 	)
-		// );
-	}, [timerActive]);
 
 	return (
 		<button

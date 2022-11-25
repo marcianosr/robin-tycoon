@@ -74,17 +74,26 @@ const Profile: FC<Props> = ({ gameState }) => {
 						<span>Bewegings radius:</span>
 						<strong>{gameState.radius}</strong>
 					</div>
+					<div className={styles.money}>
+						<div>
+							<span>Maandelijks inkomen:</span>
+							<strong> €{gameState.income}</strong>
+						</div>
+						<div>
+							<span>Maandelijkse kosten:</span>
+							<strong> €{gameState.costs}</strong>
+						</div>
+						<div>
+							<span>Netto inkomen:</span>
+							<strong>
+								{" "}
+								€{gameState.income + gameState.costs}
+							</strong>
+						</div>
+					</div>
 					<div>
 						<span>Geld:</span>
-						<strong>€{gameState.money}</strong>
-					</div>
-					<div>
-						<span>Maandelijks inkomen:</span>
-						<strong>€{gameState.income}</strong>
-					</div>
-					<div>
-						<span> Maandelijkse kosten</span>
-						<strong>€{gameState.costs}</strong>
+						<strong> €{gameState.money}</strong>
 					</div>
 				</article>
 			</section>

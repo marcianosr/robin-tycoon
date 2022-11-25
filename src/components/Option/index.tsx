@@ -10,9 +10,16 @@ type Props = {
 	item: Item;
 	gameState: any;
 	setGameState: any;
+	numberOfItems: number;
 };
 
-const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
+const Option: FC<Props> = ({
+	category,
+	item,
+	gameState,
+	setGameState,
+	numberOfItems,
+}) => {
 	const [amountOfActionsByCategory, setAmountOfActionsByCategory] =
 		useState(0);
 
@@ -34,6 +41,7 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 		<li
 			className={classnames({
 				[styles.disableItem]: !isItemEnabled,
+				[styles.hide]: item.limit?.amount === amountOfActionsByCategory,
 			})}
 		>
 			<section className={styles.itemInner}>
@@ -84,6 +92,7 @@ const Option: FC<Props> = ({ category, item, gameState, setGameState }) => {
 							gameState={gameState}
 							setGameState={setGameState}
 							item={item}
+							numberOfItems={numberOfItems}
 						/>
 					</section>
 				</section>

@@ -111,3 +111,7 @@ button {
 .emoji {
 	font-size: 2rem;
 }
+
+.hide {
+	display: none;
+}

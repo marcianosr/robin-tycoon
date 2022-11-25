@@ -72,11 +72,11 @@ function App() {
 		income: 0,
 		costs: 0,
 		progress: {
-			amount: 23,
-			title: "Starter",
+			amount: 0,
 		},
 		won: false,
-		actionsActive: [],
+		data: data.game.categories,
+		unlockedItems: [],
 	});
 
 	const [activeCategory, setActiveCategory] = useState<ShortNames>("living");
@@ -85,6 +85,10 @@ function App() {
 	const [fakeBuyButtonText, setFakeBuyButtonText] = useState(false);
 
 	const onSelectCategory = (cat: ShortNames) => setActiveCategory(cat);
+
+	const getAllItems = data.game.categories
+		.map((category) => category.items)
+		.flat();
 
 	useEffect(() => {
 		const getCurrentEvolveState = evolveAt
@@ -110,7 +114,7 @@ function App() {
 						...gameState.progress,
 						amount:
 							gameState.progress.amount > 0
-								? gameState.progress.amount - 1
+								? gameState.progress.amount
 								: gameState.progress.amount,
 					},
 				});
@@ -148,7 +152,7 @@ function App() {
 	}, [gameState.time.month]);
 
 	useEffect(() => {
-		if (gameState.progress.amount === 100) {
+		if (gameState.progress.amount >= 100) {
 			// Stop the game, show dialog
 
 			winGame();
@@ -241,6 +245,19 @@ function App() {
 				</dialog>
 			)}
 			<section className="contentContainer">
+				<div>
+					<h1>
+						Vrijgespeeld: {gameState.unlockedItems.length}/
+						{getAllItems.length}
+					</h1>
+					<section className="small-card-container">
+						{gameState.unlockedItems.map((item: Item) => (
+							<section className="small-card">
+								<span>{item.name}</span>
+							</section>
+						))}
+					</section>
+				</div>
 				<div className="category-container-buttons">
 					<h1>Kies een categorie: </h1>
 					<div className="category-buttons">
@@ -258,7 +275,7 @@ function App() {
 					</div>
 				</div>
 				<h1>Voer een actie uit:</h1>
-				{data.game.categories.map((category) => (
+				{gameState.data.map((category) => (
 					<section
 						className={classnames("category", {
 							["showCategory"]:
@@ -272,6 +289,7 @@ function App() {
 								<Option
 									category={category.name}
 									item={item}
+									numberOfItems={getAllItems.length}
 									gameState={gameState}
 									setGameState={setGameState}
 								/>
@@ -283,30 +301,6 @@ function App() {
 			<section>
 				<span>Advertenties</span>
 				<button onClick={() => setShowPopup(true)}>Kopen</button>
-			</section>
-			<section className="timeContainer">
-				<div className="running-actions">
-					{/* {gameState.actionsActive.map((item) => (
-						<span>{item.name}</span>
-					))} */}
-				</div>
-				<div className="time">
-					<Meter
-						max={51}
-						value={gameState.time.week}
-						text={`Week ${gameState.time.week}`}
-					/>
-					<Meter
-						max={11}
-						value={gameState.time.month}
-						text={`${months[gameState.time.month - 1]}`}
-					/>
-					<Meter
-						max={2022}
-						value={gameState.time.year}
-						text={`${gameState.time.year}`}
-					/>
-				</div>
 			</section>
 		</div>
 	);
