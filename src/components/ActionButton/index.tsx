@@ -57,10 +57,11 @@ const ActionButton: FC<Props> = ({
 			}
 
 			if (key === "money" && typeof value !== "number") {
+				console.log("v", value.amount);
 				return {
 					...prev,
 					money: gameStateValue + value.amount,
-					income: value.amount > 0 ? value.amount : gameStateValue,
+					income: value.amount > 0 ? value.amount : gameState.income,
 					costs:
 						value.amount < 0
 							? gameState.costs + value.amount

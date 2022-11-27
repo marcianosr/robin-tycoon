@@ -31,11 +31,6 @@ export const evolveAt = [
 ];
 
 const Profile: FC<Props> = ({ gameState }) => {
-	const progress = Math.round(
-		gameState.progress.amount +
-			(gameState.lifeXP + gameState.socialXP + gameState.workXP) / 10
-	);
-
 	return (
 		<section className={styles.profileContainer}>
 			<section className={styles.profile}>

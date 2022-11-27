@@ -37,16 +37,22 @@ const Option: FC<Props> = ({
 
 	const moneyBasisText = moneyTexts[item.earned.money?.basis as Basis];
 
+	const isCollectedItem = gameState.unlockedItems.find(
+		(i: Item) => i.name === item.name
+	);
+
 	return (
 		<li
 			className={classnames({
 				[styles.disableItem]: !isItemEnabled,
 				[styles.hide]: item.limit?.amount === amountOfActionsByCategory,
+				[styles.collected]: isCollectedItem,
 			})}
 		>
 			<section className={styles.itemInner}>
 				<section className={styles.imageAndRequirements}>
-					<h2>{item.name}</h2>
+					<h2>{item.name}</h2>{" "}
+					{isCollectedItem && "Deze is vrijgespeeld ✅"}
 					{item.videoURL && (
 						<iframe
 							src="https://www.facebook.com/plugins/video.php?height=314&href=https%3A%2F%2Fwww.facebook.com%2Fjeffrey.beckers%2Fvideos%2F2974491055947757%2F&show_text=false&width=560&t=0"
@@ -79,7 +85,6 @@ const Option: FC<Props> = ({
 							<span className={styles.emoji}>🤑</span>
 						</strong>
 					)}
-
 					<section className={styles.requirements}>
 						<ActionButton
 							category={category}
@@ -160,13 +165,8 @@ const Option: FC<Props> = ({
 								€{item.earned.money.amount > 0 && "+"}
 								{item.earned.money.amount}
 							</strong>
-							{item.earned.money.basis ? (
+							{item.earned.money.basis && (
 								<span> {moneyBasisText}</span>
-							) : (
-								<span>
-									{" "}
-									Bedrag wordt per keer bij/afgeschreven
-								</span>
 							)}
 						</div>
 					)}

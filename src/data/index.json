@@ -7,20 +7,40 @@
 				"description": "Genieten van het leven is belangrijk.",
 				"items": [
 					{
+						"name": "Advies vragen van thuis",
+						"earned": {
+							"socialXP": 5,
+							"lifeXP": 5
+						},
+						"cooldown": 70
+					},
+					{
+						"name": "Op bezoek gaan bij opa en oma",
+						"imageURL": "opa-oma.jpg",
+						"earned": {
+							"socialXP": 20,
+							"lifeXP": 20
+						},
+						"required": {
+							"socialXP": 10
+						},
+						"cooldown": 250
+					},
+					{
 						"name": "Kornet bij Crescendo",
 						"imageURL": "robin-cornet.png",
 						"earned": {
-							"socialXP": 75,
-							"lifeXP": 25,
+							"socialXP": 110,
+							"lifeXP": 60,
 							"workXP": -25,
 							"money": {
-								"amount": -10,
+								"amount": -12,
 								"basis": "monthly"
 							}
 						},
 						"required": {
-							"socialXP": 0,
-							"radius": 0,
+							"socialXP": 25,
+							"radius": 50,
 							"money": {
 								"amount": 15
 							}
@@ -61,9 +81,9 @@
 						"name": "Abbo kopen op League of Legends skins",
 						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/487779_339938256122089_1105893052_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=f9d7a1&_nc_ohc=tjaa8YhTr-QAX8r4_hB&_nc_ht=scontent-ams4-1.xx&oh=00_AfD4-FLNwoc9Fm3_-RUrbvPD6Ck7Sn3Oa9gcEIyfnmLiTQ&oe=63A17E99",
 						"earned": {
-							"socialXP": 5,
+							"socialXP": 20,
 							"money": {
-								"amount": -5,
+								"amount": -3,
 								"basis": "monthly"
 							}
 						},
@@ -77,28 +97,7 @@
 						},
 						"cooldown": 35
 					},
-					{
-						"name": "Advies vragen van thuis",
-						"earned": {
-							"socialXP": 5,
-							"lifeXP": 5
-						},
-						"required": {
-							"socialXP": 10
-						},
-						"cooldown": 50
-					},
-					{
-						"name": "Op bezoek gaan bij opa en oma",
-						"earned": {
-							"socialXP": 20,
-							"lifeXP": 20
-						},
-						"required": {
-							"socialXP": 10
-						},
-						"cooldown": 150
-					},
+
 					{
 						"name": "Vrienden maken",
 						"imageURL": "https://scontent-ams2-1.xx.fbcdn.net/v/t1.18169-9/1231653_10200580608424726_805898821_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=nunuioUKrFkAX9IPLm4&_nc_ht=scontent-ams2-1.xx&oh=00_AfB6_xMdYJ4mMoTYW9u4nmdMFVbfX77EJC-W9rzSslvaTw&oe=63A17ADA",
@@ -167,7 +166,9 @@
 						"required": {
 							"socialXP": 300,
 							"lifeXP": 300,
-							"money": 250,
+							"money": {
+								"amount": 250
+							},
 							"radius": 100
 						},
 						"cooldown": 0,
@@ -183,7 +184,8 @@
 				"description": "Deze acties kun je eenmalig uitvoeren. Hierdoor krijg je maandelijks een inkomen",
 				"items": [
 					{
-						"name": "Gesponsord worden door pa en ma",
+						"name": "Zakgeld",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/19884061_1819002871763702_6026186992026989805_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=730e14&_nc_ohc=MG0f4NhctCsAX9S_e8-&tn=Hnwj2TTOTTYYcAwf&_nc_ht=scontent-ams4-1.xx&oh=00_AfBIO-PVUSdxqHcZg0N8Bn4WUw7kolbaZjGlRme5Q0vc-Q&oe=63AB1719",
 						"earned": {
 							"money": {
 								"amount": 25,
@@ -194,6 +196,24 @@
 						"required": {
 							"lifeXP": 10,
 							"socialXP": 10
+						},
+						"limit": {
+							"amount": 1
+						}
+					},
+					{
+						"name": "Gesponsord worden door pa en ma",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/19884061_1819002871763702_6026186992026989805_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=730e14&_nc_ohc=MG0f4NhctCsAX9S_e8-&tn=Hnwj2TTOTTYYcAwf&_nc_ht=scontent-ams4-1.xx&oh=00_AfBIO-PVUSdxqHcZg0N8Bn4WUw7kolbaZjGlRme5Q0vc-Q&oe=63AB1719",
+						"earned": {
+							"money": {
+								"amount": 35,
+								"basis": "monthly"
+							}
+						},
+						"cooldown": 0,
+						"required": {
+							"lifeXP": 50,
+							"socialXP": 100
 						},
 						"limit": {
 							"amount": 1
@@ -232,12 +252,13 @@
 					},
 					{
 						"name": "Stagiair bij RI Print & Sign",
+						"imageURL": "https://rireklame.nl/wp-content/uploads/2019/09/cropped-Header-RI-2.001-2.jpeg",
 						"earned": {
 							"workXP": 90,
-							"lifeXP": 90,
+							"lifeXP": 50,
 							"socialXP": 10,
 							"money": {
-								"amount": 125,
+								"amount": 75,
 								"basis": "monthly"
 							}
 						},
@@ -254,24 +275,24 @@
 					},
 					{
 						"name": "ff bijklussen",
-						"imageURL": "https://topbakverhuur.nl/wp-content/uploads/2018/03/Avia-Amsterdam-Appelweg-46.png",
+						"imageURL": "robin-ah.jpeg",
 						"earned": {
-							"workXP": 50,
-							"lifeXP": 25,
-							"socialXP": -25,
+							"workXP": 150,
+							"lifeXP": 100,
+							"socialXP": -45,
 							"money": {
-								"amount": 25
+								"amount": 85
 							}
 						},
 						"required": {
-							"socialXP": 20,
-							"lifeXP": 20,
-							"workXP": 100,
-							"radius": 50
+							"socialXP": 100,
+							"lifeXP": 125,
+							"workXP": 125,
+							"radius": 150
 						},
-						"cooldown": 0,
+						"cooldown": 50,
 						"limit": {
-							"amount": 2
+							"amount": 3
 						}
 					},
 					{
@@ -328,6 +349,7 @@
 				"items": [
 					{
 						"name": "Lopen",
+						"imageURL": "robin-strand.jpeg",
 						"earned": {
 							"socialXP": 10,
 							"radius": 25
@@ -347,7 +369,7 @@
 						"required": {
 							"money": {
 								"basis": "monthly",
-								"amount": 25
+								"amount": 15
 							},
 							"lifeXP": 25
 						},
@@ -358,6 +380,7 @@
 					},
 					{
 						"name": "Leipe Scooter",
+						"imageURL": "https://cdn.shopify.com/s/files/1/0605/4887/4473/products/4006942812004_0_600x.jpg?v=1636438941",
 						"earned": {
 							"lifeXP": 50,
 							"socialXP": 10,
@@ -380,6 +403,7 @@
 					},
 					{
 						"name": "Renault Clio",
+						"imageURL": "https://media.autoexpress.co.uk/image/private/s--X-WVjvBW--/f_auto,t_content-image-full-desktop@1/v1605874711/autoexpress/2020/11/Renault%20Clio%20hybrid%20.jpg",
 						"earned": {
 							"socialXP": 200,
 							"lifeXP": 200,
@@ -451,7 +475,7 @@
 							"lifeXP": 125,
 							"socialXP": 125,
 							"money": {
-								"amount": 200
+								"amount": 500
 							}
 						},
 						"cooldown": 0,
@@ -464,12 +488,14 @@
 						"earned": {
 							"lifeXP": 65,
 							"money": {
-								"amount": -250
+								"amount": -100
 							}
 						},
 						"required": {
+							"lifeXP": 175,
+							"socialXP": 175,
 							"money": {
-								"amount": 300
+								"amount": 650
 							}
 						},
 						"cooldown": 0,
@@ -486,8 +512,10 @@
 							}
 						},
 						"required": {
+							"lifeXP": 325,
+							"socialXP": 325,
 							"money": {
-								"amount": 1000
+								"amount": -1000
 							}
 						},
 						"cooldown": 0,
