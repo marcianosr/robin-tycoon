@@ -187,8 +187,63 @@ function App() {
 							"#967bb6",
 						]}
 					/>
-					<dialog open={gameState.progress.amount === 100}>
-						<h1>Gedicht</h1>
+					{gameState.progress.amount === 100 && (
+						<div className="backdrop"></div>
+					)}
+					<dialog
+						className="gedicht"
+						open={gameState.progress.amount === 100}
+					>
+						<article>
+							<h1>Beste Robin,</h1>
+							<p>
+								Sinter-lexxxus is weer in 't land, jauwwwww maak
+								plaats ga aan de kant.
+							</p>
+							<p>
+								Deze Sint heeft je leven al jaren bijgehouden,
+								ook toen je je spullen van je oude appartement
+								naar je nieuwe appartement versjouwde.{" "}
+							</p>
+							<p>
+								Ik negeer lekker die AVG privacy wetgeving, nee
+								met al die weetjes van mensen blijft ik bestaan
+								en krijg ik als oude Sint weer een opleving.{" "}
+							</p>
+							<p>
+								Ik als een voorganger op Feesboek zou je kunnen
+								zeggen, want zoals je zojuist hebt gezien, heb
+								ik allerlei elementen in jouw leven weten vast
+								te leggen.
+							</p>
+							<p>
+								Van Kornetten bij Crescendo tot een leipe
+								scooter tot het kopen van leaugue of legends
+								skins tot afspreken met je matties, al die
+								dingen kosten zoals je weet makkelijk een paar
+								barkies.
+							</p>
+							<p>
+								Al die dingen die je zonet hebt kunnen
+								herbeleven is wie je bent, en de Sint kan
+								zeggen: Hij vindt je een fijne vent.
+							</p>
+							<p>
+								Met al je opgedane ervaring en C aan je zij, is
+								deze Sint-Lexxus met zijn Pieten echt KAPOT
+								blij.
+							</p>
+							<p>
+								Tot slot moet je me één ding beloven, weet dat
+								ik je in de gaten hou in elk plan wat je
+								probeert te bekokstoven.{" "}
+							</p>
+							<p>Dus, zeg ik het nog eens maar:</p>
+							<strong style={{ color: "red" }}>
+								Robin, maak me niet kwaad komend jaar.
+							</strong>
+							<p>Groetjes, Sint en Piet</p>
+						</article>
 					</dialog>
 				</>
 			)}
@@ -209,36 +264,45 @@ function App() {
 									<span>
 										+500 sociale XP en +500 levens ervaring
 									</span>
-									<span>
+									<div>
 										2,50 euro (via iDeal)
 										<img
 											width={40}
 											height={40}
 											src="https://www.ideal.nl/img/logo/ideal-logo-1024.png"
 										/>
-									</span>
-									<button
-										onClick={() => {
-											setFakeBuyButtonText(true);
-											setGameState({
-												...gameState,
-												lifeXP: -200,
-												socialXP: -200,
-												money: -200,
-											});
-										}}
-									>
-										Koop
-									</button>
+									</div>
+									<div>
+										<button
+											onClick={() => {
+												setFakeBuyButtonText(true);
+												setGameState({
+													...gameState,
+													lifeXP: -200,
+													socialXP: -200,
+													money: -200,
+												});
+											}}
+										>
+											Koop
+										</button>
+									</div>
 								</article>
 							)}
 
 							{fakeBuyButtonText && (
-								<span>
-									Gast... niet alles kun je kopen. Omdat je
-									hier in bent getrapt zetten we je weer even
-									een stapje terug
-								</span>
+								<>
+									<span>
+										Gast... niet alles kun je kopen. Omdat
+										je hier in bent getrapt zetten we je
+										weer even een stapje terug
+									</span>
+									<button
+										onClick={() => setShowPopup(!showPopup)}
+									>
+										Klik weg
+									</button>
+								</>
 							)}
 						</li>
 					</ul>
@@ -299,7 +363,9 @@ function App() {
 				))}
 			</section>
 			<section>
-				<span>Advertenties</span>
+				<span>
+					Aanbieding: levens elixer kopen om je ervaring te boosten:
+				</span>
 				<button onClick={() => setShowPopup(true)}>Kopen</button>
 			</section>
 		</div>
