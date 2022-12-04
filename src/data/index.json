@@ -184,7 +184,7 @@
 				"description": "Deze acties kun je eenmalig uitvoeren. Hierdoor krijg je maandelijks een inkomen",
 				"items": [
 					{
-						"name": "Zakgeld",
+						"name": " ",
 						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t1.18169-9/19884061_1819002871763702_6026186992026989805_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=730e14&_nc_ohc=MG0f4NhctCsAX9S_e8-&tn=Hnwj2TTOTTYYcAwf&_nc_ht=scontent-ams4-1.xx&oh=00_AfBIO-PVUSdxqHcZg0N8Bn4WUw7kolbaZjGlRme5Q0vc-Q&oe=63AB1719",
 						"earned": {
 							"money": {
@@ -252,7 +252,7 @@
 					},
 					{
 						"name": "Stagiair bij RI Print & Sign",
-						"imageURL": "https://rireklame.nl/wp-content/uploads/2019/09/cropped-Header-RI-2.001-2.jpeg",
+						"imageURL": "https://scontent-ams4-1.xx.fbcdn.net/v/t39.30808-6/305621679_430321829236120_2874511609692920367_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=09cbfe&_nc_ohc=HJslC8bJ7bQAX9N_NIB&_nc_ht=scontent-ams4-1.xx&oh=00_AfBH3rkODTiGBlrJEDc2uwbewIG0XC5AyIEtpyxHa7hcRg&oe=6391DB56",
 						"earned": {
 							"workXP": 90,
 							"lifeXP": 50,
@@ -433,6 +433,8 @@
 				"items": [
 					{
 						"name": "Thuis wonen",
+						"imageURL": "https://cdn.binqmedia.nl/Streetview/hulpdiensten/2015/5/6/2500256.jpg",
+
 						"earned": {
 							"lifeXP": 10,
 							"socialXP": 10
@@ -443,7 +445,8 @@
 						}
 					},
 					{
-						"name": "Wonen in de Notenkraker",
+						"name": "Verblijven in het Badhuis",
+						"imageURL": "https://upload.wikimedia.org/wikipedia/commons/9/97/Meteorenweg_158-160%2C_Amsterdam.jpg",
 						"earned": {
 							"lifeXP": 20,
 							"money": {
